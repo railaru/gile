@@ -15,6 +15,13 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontWeight: {
+      light: "200",
+      normal: "300",
+      medium: "400",
+      semibold: "500",
+      bold: "600",
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -23,8 +30,8 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

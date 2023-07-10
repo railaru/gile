@@ -45,12 +45,12 @@ const matter = localFont({
     },
     {
       path: "./../../public/assets/fonts/Matter-Heavy.ttf",
-      weight: "700",
+      weight: "600",
       style: "normal",
     },
     {
       path: "./../../public/assets/fonts/Matter-HeavyItalic.ttf",
-      weight: "700",
+      weight: "600",
       style: "italic",
     },
   ],
