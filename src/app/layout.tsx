@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ReactNode } from "react";
+import Header from "@/app/Header/Header";
+import Aside from "./Aside/Aside";
 
 const matter = localFont({
   variable: "--font-matter",
@@ -64,7 +66,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={matter.variable}>{children}</body>
+      <body className={matter.variable}>
+        <Header />
+
+        <div className="lg:flex">
+          <Aside />
+
+          <main>{children}</main>
+        </div>
+      </body>
     </html>
   );
 }
