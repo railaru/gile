@@ -72,7 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="lg:flex">
           <Aside />
 
-          <main>{children}</main>
+          <main className="max-w-[800px] mx-auto pt-12">{children}</main>
         </div>
       </body>
     </html>

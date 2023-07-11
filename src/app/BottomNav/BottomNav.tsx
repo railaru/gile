@@ -19,7 +19,7 @@ export default function BottomNav({ prevLink, nextLink, ...props }: Props) {
       )}
     >
       {prevLink && (
-        <Button asChild variant="ghost">
+        <Button asChild variant="ghost" className="mr-4">
           <Link href={prevLink}>Go Back</Link>
         </Button>
       )}

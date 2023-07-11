@@ -29,7 +29,7 @@ export default function Links() {
         <li key={index}>
           <Link
             href={link.url}
-            className={cn("text-sm font-light", {
+            className={cn("text-sm font-[300]", {
               "text-primary": pathName === link.url,
             })}
           >
