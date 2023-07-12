@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button/Button";
+import Button from "@/components/ui/Button/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
