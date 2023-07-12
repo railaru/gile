@@ -3,6 +3,7 @@ import Pane from "@/components/ui/Pane/Pane";
 import Textarea from "@/components/ui/Textarea/Textarea";
 import { PAGE_ROUTES } from "@/constants/routes";
 import React from "react";
+import Examples from "./Examples/Examples";
 
 export default function Page() {
   return (
@@ -14,9 +15,7 @@ export default function Page() {
               What decision do you have to make?
             </h1>
 
-            <button className="text-sm text-primary font-[300]" type="button">
-              Examples
-            </button>
+            <Examples />
           </div>
 
           <div className="h-[1px] bg-neutral-6" />
