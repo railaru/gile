@@ -22,12 +22,12 @@ type FormData = z.infer<typeof schema>;
 
 export default function DecisionForm() {
   const router = useRouter();
-  const { setDecision } = useDecisionsStore();
+  const { decision, setDecision } = useDecisionsStore();
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      decision: "",
+      decision,
     },
   });
 
@@ -44,6 +44,7 @@ export default function DecisionForm() {
           placeholder:
             "Write one sentence about what challenge you want to tackle. Keep it short and simple.",
           onChange: (e) => form.setValue("decision", e.target.value),
+          value: form.watch("decision"),
         }}
         error={form.formState.errors.decision?.message}
         currentCharacterCount={form.watch("decision")?.length}
