@@ -17,6 +17,7 @@ specifiers:
   eslint-config-next: 13.4.9
   lucide-react: ^0.259.0
   next: 13.4.9
+  next-nprogress-bar: ^2.0.2
   postcss: 8.4.25
   react: 18.2.0
   react-dom: 18.2.0
@@ -45,6 +46,7 @@ dependencies:
   eslint-config-next: 13.4.9_iqf7tbmerllfqanu4l3d6aqdn4
   lucide-react: 0.259.0_react@18.2.0
   next: 13.4.9_biqbaboplfbrettd7655fr4n2y
+  next-nprogress-bar: 2.0.2
   postcss: 8.4.25
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2422,6 +2424,12 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
+  /next-nprogress-bar/2.0.2:
+    resolution: {integrity: sha512-kM0PylW+952ZJDyHiy3lcJE6lo9XuHfT2yvC2G7lAtRX/2xvPXpGzfjxu0p0bbDsotyaxUooQSdbz2G1h5klAA==}
+    dependencies:
+      nprogress: 0.2.0
+    dev: false
+
   /next/13.4.9_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-vtefFm/BWIi/eWOqf1GsmKG3cjKw1k3LjuefKRcL3iiLl3zWzFdPG3as6xtxrGO6gwTzzaO1ktL4oiHt/uvTjA==}
     engines: {node: '>=16.8.0'}
@@ -2491,6 +2499,10 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       path-key: 4.0.0
+    dev: false
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
     dev: false
 
   /object-assign/4.1.1:

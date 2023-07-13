@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { ReactNode } from "react";
 import Header from "@/app/Header/Header";
 import Aside from "./Aside/Aside";
+import RouteChangeAnimation from "./RouteChangeAnimation/RouteChangeAnimation";
 
 const matter = localFont({
   variable: "--font-matter",
@@ -74,6 +75,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
           <main className="max-w-[800px] mx-auto pt-12">{children}</main>
         </div>
+
+        <RouteChangeAnimation />
       </body>
     </html>
   );
