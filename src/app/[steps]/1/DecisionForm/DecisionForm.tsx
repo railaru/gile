@@ -9,6 +9,7 @@ import BottomNav from "@/app/BottomNav/BottomNav";
 import Button from "@/components/ui/Button/Button";
 import { useRouter } from "next/navigation";
 import { PAGE_ROUTES } from "@/constants/routes";
+import useDecisionsStore from "@/app/store/decisions";
 
 const schema = z.object({
   decision: z
@@ -21,6 +22,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function DecisionForm() {
   const router = useRouter();
+  const { setDecision } = useDecisionsStore();
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -30,6 +32,7 @@ export default function DecisionForm() {
   });
 
   const handleSubmit = (form: FormData) => {
+    setDecision(form.decision);
     router.push(PAGE_ROUTES.STEPS[2]);
   };
 
