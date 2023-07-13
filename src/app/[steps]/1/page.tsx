@@ -1,9 +1,7 @@
-import BottomNav from "@/app/BottomNav/BottomNav";
 import Pane from "@/components/ui/Pane/Pane";
-import Textarea from "@/components/ui/Textarea/Textarea";
-import { PAGE_ROUTES } from "@/constants/routes";
 import React from "react";
 import Examples from "./Examples/Examples";
+import DecisionForm from "./DecisionForm/DecisionForm";
 
 export default function Page() {
   return (
@@ -20,11 +18,9 @@ export default function Page() {
 
           <div className="h-[1px] bg-neutral-6" />
 
-          <Textarea placeholder="Write one sentence about what challenge you want to tackle. Keep it short and simple." />
+          <DecisionForm />
         </div>
       </Pane>
-
-      <BottomNav nextLink={PAGE_ROUTES.STEPS[2]} />
     </div>
   );
 }

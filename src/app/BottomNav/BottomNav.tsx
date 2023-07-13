@@ -4,12 +4,9 @@ import Link from "next/link";
 
 import React, { HTMLAttributes } from "react";
 
-type Props = HTMLAttributes<HTMLElement> & {
-  prevLink?: string;
-  nextLink?: string;
-};
+type Props = HTMLAttributes<HTMLElement>;
 
-export default function BottomNav({ prevLink, nextLink, ...props }: Props) {
+export default function BottomNav({ ...props }: Props) {
   return (
     <nav
       {...props}
@@ -18,17 +15,7 @@ export default function BottomNav({ prevLink, nextLink, ...props }: Props) {
         props.className
       )}
     >
-      {prevLink && (
-        <Button asChild variant="ghost" className="mr-4">
-          <Link href={prevLink}>Go Back</Link>
-        </Button>
-      )}
-
-      {nextLink && (
-        <Button asChild>
-          <Link href={nextLink}>Continue</Link>
-        </Button>
-      )}
+      {props.children}
     </nav>
   );
 }
