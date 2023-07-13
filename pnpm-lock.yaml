@@ -10,6 +10,7 @@ specifiers:
   '@types/node': 20.4.1
   '@types/react': 18.2.14
   '@types/react-dom': 18.2.6
+  '@types/uuid': ^9.0.2
   autoprefixer: 10.4.14
   class-variance-authority: ^0.6.1
   clsx: ^1.2.1
@@ -26,6 +27,7 @@ specifiers:
   tailwindcss: 3.3.2
   tailwindcss-animate: ^1.0.6
   typescript: 5.1.6
+  uuid: ^9.0.0
   zod: ^3.21.4
   zustand: ^4.3.9
 
@@ -39,6 +41,7 @@ dependencies:
   '@types/node': 20.4.1
   '@types/react': 18.2.14
   '@types/react-dom': 18.2.6
+  '@types/uuid': 9.0.2
   autoprefixer: 10.4.14_postcss@8.4.25
   class-variance-authority: 0.6.1
   clsx: 1.2.1
@@ -55,6 +58,7 @@ dependencies:
   tailwindcss: 3.3.2
   tailwindcss-animate: 1.0.6_tailwindcss@3.3.2
   typescript: 5.1.6
+  uuid: 9.0.0
   zod: 3.21.4
   zustand: 4.3.9_react@18.2.0
 
@@ -889,6 +893,10 @@ packages:
 
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+    dev: false
+
+  /@types/uuid/9.0.2:
+    resolution: {integrity: sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==}
     dev: false
 
   /@typescript-eslint/parser/5.62.0_iqf7tbmerllfqanu4l3d6aqdn4:
@@ -3334,6 +3342,11 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /watchpack/2.4.0:

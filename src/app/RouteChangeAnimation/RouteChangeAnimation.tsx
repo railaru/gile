@@ -5,7 +5,7 @@ import { AppProgressBar } from "next-nprogress-bar";
 export default function RouteChangeAnimation() {
   return (
     <AppProgressBar
-      height="3px"
+      height="2px"
       color="#00d369"
       options={{ showSpinner: false }}
       shallowRouting

@@ -1,6 +1,7 @@
 import React from "react";
 import Pane from "@/components/ui/Pane/Pane";
 import Examples from "./Examples/Examples";
+import Options from "./Options/Options";
 
 export default function Page() {
   return (
@@ -13,7 +14,13 @@ export default function Page() {
             <Examples />
           </div>
 
+          <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px]">
+            Add what possible options you could take to solve your challenge.
+          </h2>
+
           <div className="h-[1px] bg-neutral-6" />
+
+          <Options />
         </div>
       </Pane>
     </div>
