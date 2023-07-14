@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@/components/ui/Button/Button";
 import useOptionsStore from "@/app/store/options";
@@ -57,8 +57,10 @@ export default function Options() {
   };
 
   return (
-    <div className="font-[300]">
-      <ul className="space-y-6">
+    <div>
+      <Divider />
+
+      <ul className="mt-8 space-y-6">
         {options.map((option) => (
           <li
             key={option.id}
@@ -100,9 +102,11 @@ export default function Options() {
           <Link href={PAGE_ROUTES.STEPS[1]}>Go back</Link>
         </Button>
 
-        <Button type="button" asChild>
-          <Link href={PAGE_ROUTES.STEPS[3]}>Continue</Link>
-        </Button>
+        {options.length > 0 && (
+          <Button type="button" asChild>
+            <Link href={PAGE_ROUTES.STEPS[3]}>Continue</Link>
+          </Button>
+        )}
       </BottomNav>
     </div>
   );

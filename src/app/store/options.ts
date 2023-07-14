@@ -11,7 +11,16 @@ type Store = {
 };
 
 const useOptionsStore = create<Store>((set) => ({
-  options: [],
+  options: [
+    {
+      id: "1",
+      title: "Lemonade stand",
+    },
+    {
+      id: "2",
+      title: "Shopify store",
+    },
+  ],
   setOptions: (payload) => set({ options: payload }),
   removeOption: (payload) =>
     set((state) => ({

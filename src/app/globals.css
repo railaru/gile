@@ -41,4 +41,5 @@
 
 body {
   font-family: var(--font-matter);
+  font-weight: 300;
 }

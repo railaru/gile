@@ -8,7 +8,7 @@ type Store = {
 };
 
 const useDecisionsStore = create<Store>((set) => ({
-  decision: "",
+  decision: "How can I start a business?",
   setDecision: (payload) => set({ decision: payload }),
 }));
 

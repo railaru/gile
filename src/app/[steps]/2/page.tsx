@@ -2,7 +2,6 @@ import React from "react";
 import Pane from "@/components/ui/Pane/Pane";
 import Examples from "./Examples/Examples";
 import Options from "./Options/Options";
-import Divider from "@/components/ui/Divider/Divider";
 
 export default function Page() {
   return (
@@ -18,8 +17,6 @@ export default function Page() {
           <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px]">
             Add what possible options you could take to solve your challenge.
           </h2>
-
-          <Divider />
 
           <Options />
         </div>
