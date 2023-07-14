@@ -24,12 +24,11 @@ type FormData = z.infer<typeof schema>;
 
 export default function Options() {
   const { options, setOptions, removeOption } = useOptionsStore();
-  const [title, setTitle] = useState("");
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      title,
+      title: "",
     },
   });
 
@@ -40,12 +39,13 @@ export default function Options() {
       ...options,
       {
         id: uuidv4(),
-        title,
+        title: form.getValues("title"),
       },
     ];
 
     setOptions(newOptions);
-    setTitle("");
+
+    form.reset();
   };
 
   const handleDelete = (option: Option) => {
@@ -73,16 +73,16 @@ export default function Options() {
         ))}
       </ul>
 
-      <form onSubmit={handleSubmit} className="flex flex-col mt-4 space-y-8">
+      <div className="h-[1px] bg-neutral-6 mt-8" />
+
+      <form onSubmit={handleSubmit} className="flex flex-col mt-8">
         <Input
           placeholder="Enter a new option"
           {...form.register("title")}
           className="h-[50px]"
         />
 
-        <div className="h-[1px] bg-neutral-6" />
-
-        <div>
+        <div className="mt-8">
           <Button type="submit" disabled={!form.formState.isValid}>
             <PlusIcon className="w-[18px] h-[18px] mr-1.5 relative bottom-[1px]" />
 
