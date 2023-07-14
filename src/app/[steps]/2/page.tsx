@@ -2,6 +2,7 @@ import React from "react";
 import Pane from "@/components/ui/Pane/Pane";
 import Examples from "./Examples/Examples";
 import Options from "./Options/Options";
+import Divider from "@/components/ui/Divider/Divider";
 
 export default function Page() {
   return (
@@ -18,7 +19,7 @@ export default function Page() {
             Add what possible options you could take to solve your challenge.
           </h2>
 
-          <div className="h-[1px] bg-neutral-6" />
+          <Divider />
 
           <Options />
         </div>

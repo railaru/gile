@@ -2,6 +2,7 @@ import Pane from "@/components/ui/Pane/Pane";
 import React from "react";
 import Examples from "./Examples/Examples";
 import DecisionForm from "./DecisionForm/DecisionForm";
+import Divider from "@/components/ui/Divider/Divider";
 
 export default function Page() {
   return (
@@ -16,7 +17,7 @@ export default function Page() {
             <Examples />
           </div>
 
-          <div className="h-[1px] bg-neutral-6" />
+          <Divider />
 
           <DecisionForm />
         </div>

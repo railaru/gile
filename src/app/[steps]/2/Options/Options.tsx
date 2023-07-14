@@ -10,6 +10,10 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/ui/Input/Input";
+import Divider from "@/components/ui/Divider/Divider";
+import BottomNav from "@/app/BottomNav/BottomNav";
+import Link from "next/link";
+import { PAGE_ROUTES } from "@/constants/routes";
 
 const schema = z.object({
   title: z
@@ -54,13 +58,13 @@ export default function Options() {
 
   return (
     <div className="font-[300]">
-      <ul className="space-y-4">
+      <ul className="space-y-6">
         {options.map((option) => (
           <li
             key={option.id}
-            className="bg-white rounded-[4px] p-4 flex justify-between items-center"
+            className="bg-white rounded-[4px] px-4 py-[21.5px] flex justify-between items-center"
           >
-            {option.title}
+            <span className="pr-3">{option.title}</span>
 
             <button
               type="button"
@@ -73,12 +77,12 @@ export default function Options() {
         ))}
       </ul>
 
-      <div className="h-[1px] bg-neutral-6 mt-8" />
+      {options.length > 0 && <Divider className="mt-8" />}
 
       <form onSubmit={handleSubmit} className="flex flex-col mt-8">
         <Input
-          placeholder="Enter a new option"
           {...form.register("title")}
+          placeholder="Enter a new option"
           className="h-[50px]"
         />
 
@@ -90,6 +94,16 @@ export default function Options() {
           </Button>
         </div>
       </form>
+
+      <BottomNav>
+        <Button variant="ghost" type="button" asChild className="mr-4">
+          <Link href={PAGE_ROUTES.STEPS[1]}>Go back</Link>
+        </Button>
+
+        <Button type="button" asChild>
+          <Link href={PAGE_ROUTES.STEPS[3]}>Continue</Link>
+        </Button>
+      </BottomNav>
     </div>
   );
 }
