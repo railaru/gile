@@ -80,7 +80,7 @@ export default function EvaluateOptions() {
 
   const onSubmit = (data: FormData) => {
     setOptions(data.options);
-    router.push(PAGE_ROUTES.STEPS.TRADEOFFS);
+    router.push(PAGE_ROUTES.STEPS.TRADEOFFS.INDEX);
   };
 
   return (

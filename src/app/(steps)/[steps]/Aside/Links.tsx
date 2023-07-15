@@ -47,9 +47,9 @@ export default function Links() {
       <ul className="space-y-4">
         <li>
           <Link
-            href={PAGE_ROUTES.STEPS.TRADEOFFS}
+            href={PAGE_ROUTES.STEPS.TRADEOFFS.INDEX}
             className={cn("text-sm font-[300]", {
-              "text-primary": pathName === PAGE_ROUTES.STEPS.TRADEOFFS,
+              "text-primary": pathName === PAGE_ROUTES.STEPS.TRADEOFFS.INDEX,
             })}
           >
             Tradeoffs
