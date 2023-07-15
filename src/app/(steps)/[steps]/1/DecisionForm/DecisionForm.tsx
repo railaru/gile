@@ -14,7 +14,7 @@ import useDecisionsStore from "@/app/(steps)/[steps]/store/decisions";
 const schema = z.object({
   decision: z
     .string()
-    .min(6, { message: "A decision should be at least 6 character long." })
+    .min(6, { message: "A decision should be at least 6 characters long." })
     .max(60, { message: "A decision should be at most 60 characters long." }),
 });
 
