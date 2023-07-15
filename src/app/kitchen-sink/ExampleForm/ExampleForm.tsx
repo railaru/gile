@@ -51,10 +51,7 @@ export default function ExampleForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {fields.map((field, index) => {
           return (
-            <div
-              key={field.id}
-              className="px-4 py-6 bg-white border rounded-lg"
-            >
+            <div key={field.id} className="p-6 bg-white border rounded-lg">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -88,9 +85,7 @@ export default function ExampleForm() {
                   valueAsNumber: true,
                   required: true,
                 })}
-                className={cn("text-sm font-[300] mt-1", {
-                  "border-destructive": errors?.cart?.[index]?.name,
-                })}
+                error={errors?.cart?.[index]?.name?.message}
               />
 
               <label

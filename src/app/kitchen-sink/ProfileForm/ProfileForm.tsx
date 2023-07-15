@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -13,7 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form/form";
+} from "@/components/ui/Form/Form";
 import Input from "@/components/ui/Input/Input";
 import { useForm } from "react-hook-form";
 

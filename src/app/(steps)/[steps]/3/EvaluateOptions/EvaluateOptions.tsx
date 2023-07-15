@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, SyntheticEvent } from "react";
+import React from "react";
 
 import {
   Table,
@@ -21,10 +21,13 @@ import Input from "@/components/ui/Input/Input";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { tableHeadData } from "./staticData";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import BottomNav from "@/app/(steps)/[steps]/BottomNav/BottomNav";
 import Button from "@/components/ui/Button/Button";
+import { PAGE_ROUTES } from "@/constants/routes";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const minRating = 1;
 const maxRating = 5;
@@ -54,33 +57,34 @@ export const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function EvaluateOptions() {
-  const { options } = useOptionsStore();
+  const router = useRouter();
+  const { options, setOptions } = useOptionsStore();
 
-  console.log(options);
-
-  const form = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       options,
     },
+    mode: "onTouched",
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { fields } = useFieldArray({
+    name: "options",
+    control,
+  });
 
-    const formValues = form.getValues();
-
-    console.log(formValues);
-  };
-
-  const handleFieldChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-
-    console.log(name, value);
+  const onSubmit = (data: FormData) => {
+    setOptions(data.options);
+    router.push(PAGE_ROUTES.STEPS.TRADEOFFS);
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} className="mt-16 xl:mr-[-200px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-16 xl:mr-[-200px]">
       <Table>
         <TableHeader>
           <TableRow>
@@ -116,34 +120,131 @@ export default function EvaluateOptions() {
         </TableHeader>
 
         <TableBody>
-          {options.map((option) => (
-            <TableRow key={option.id}>
-              <TableCell>{option.title}</TableCell>
+          {fields.map((field, index) => {
+            return (
+              <TableRow key={index}>
+                <TableCell className="min-w-[184px]">{field.title}</TableCell>
 
-              {Object.values(option.ratings).map((value, index) => {
-                const ratingName = Object.keys(option.ratings)[index];
-                const fieldName = `options.${index}.ratings.${ratingName}`;
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(
+                      `options.${index}.ratings.financialCost` as const,
+                      {
+                        valueAsNumber: true,
+                        required: true,
+                      }
+                    )}
+                    min={minRating}
+                    max={maxRating}
+                    error={
+                      errors?.options?.[index]?.ratings?.financialCost?.message
+                    }
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
 
-                return (
-                  <TableCell key={index}>
-                    <Input
-                      defaultValue={value}
-                      onChange={handleFieldChange}
-                      name={fieldName}
-                      type="number"
-                      // min={minRating}
-                      // max={maxRating}
-                      className="text-center border-0"
-                    />
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          ))}
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(
+                      `options.${index}.ratings.levelOfEffort` as const,
+                      {
+                        valueAsNumber: true,
+                        required: true,
+                      }
+                    )}
+                    min={minRating}
+                    max={maxRating}
+                    error={
+                      errors?.options?.[index]?.ratings?.levelOfEffort?.message
+                    }
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(
+                      `options.${index}.ratings.timeInvestment` as const,
+                      {
+                        valueAsNumber: true,
+                        required: true,
+                      }
+                    )}
+                    min={minRating}
+                    max={maxRating}
+                    error={
+                      errors?.options?.[index]?.ratings?.timeInvestment?.message
+                    }
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(`options.${index}.ratings.risk` as const, {
+                      valueAsNumber: true,
+                      required: true,
+                    })}
+                    min={minRating}
+                    max={maxRating}
+                    error={errors?.options?.[index]?.ratings?.risk?.message}
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(
+                      `options.${index}.ratings.shortTermReturn` as const,
+                      {
+                        valueAsNumber: true,
+                        required: true,
+                      }
+                    )}
+                    min={minRating}
+                    max={maxRating}
+                    error={
+                      errors?.options?.[index]?.ratings?.shortTermReturn
+                        ?.message
+                    }
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <Input
+                    type="number"
+                    {...register(
+                      `options.${index}.ratings.longTermReturn` as const,
+                      {
+                        valueAsNumber: true,
+                        required: true,
+                      }
+                    )}
+                    min={minRating}
+                    max={maxRating}
+                    error={
+                      errors?.options?.[index]?.ratings?.longTermReturn?.message
+                    }
+                    className="text-sm font-[300] text-center"
+                  />
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
 
       <BottomNav>
+        <Button variant="ghost" type="button" asChild className="mr-4">
+          <Link href={PAGE_ROUTES.STEPS[2]}>Go back</Link>
+        </Button>
+
         <Button type="submit">Continue</Button>
       </BottomNav>
     </form>

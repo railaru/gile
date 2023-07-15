@@ -4,6 +4,6 @@ export const PAGE_ROUTES = {
     "1": "/steps/1",
     "2": "/steps/2",
     "3": "/steps/3",
-    "4": "/steps/4",
+    TRADEOFFS: "/steps/tradeoffs",
   },
 };

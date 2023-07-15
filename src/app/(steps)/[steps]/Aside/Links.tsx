@@ -5,6 +5,8 @@ import { PAGE_ROUTES } from "@/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Divider from "@/components/ui/Divider/Divider";
+
 const links = [
   {
     name: "What decision do you have to make?",
@@ -24,19 +26,36 @@ export default function Links() {
   const pathName = usePathname();
 
   return (
-    <ul className="space-y-4">
-      {links.map((link, index) => (
-        <li key={index}>
+    <>
+      <ul className="space-y-4">
+        {links.map((link, index) => (
+          <li key={index}>
+            <Link
+              href={link.url}
+              className={cn("text-sm font-[300]", {
+                "text-primary": pathName === link.url,
+              })}
+            >
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <Divider className="my-4" />
+
+      <ul className="space-y-4">
+        <li>
           <Link
-            href={link.url}
+            href={PAGE_ROUTES.STEPS.TRADEOFFS}
             className={cn("text-sm font-[300]", {
-              "text-primary": pathName === link.url,
+              "text-primary": pathName === PAGE_ROUTES.STEPS.TRADEOFFS,
             })}
           >
-            {link.name}
+            Tradeoffs
           </Link>
         </li>
-      ))}
-    </ul>
+      </ul>
+    </>
   );
 }
