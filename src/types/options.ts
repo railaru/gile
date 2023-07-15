@@ -10,5 +10,5 @@ type OptionRatings = {
 export type Option = {
   id: string;
   title: string;
-  ratings?: OptionRatings;
+  ratings: OptionRatings;
 };

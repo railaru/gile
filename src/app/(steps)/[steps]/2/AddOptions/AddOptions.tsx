@@ -3,7 +3,7 @@
 import React, { FormEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@/components/ui/Button/Button";
-import useOptionsStore from "@/app/store/options";
+import useOptionsStore from "@/app/(steps)/[steps]/store/options";
 import { Option } from "@/types/options";
 import { PlusIcon } from "lucide-react";
 import { z } from "zod";
@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/ui/Input/Input";
 import Divider from "@/components/ui/Divider/Divider";
-import BottomNav from "@/app/BottomNav/BottomNav";
+import BottomNav from "@/app/(steps)/[steps]/BottomNav/BottomNav";
 import Link from "next/link";
 import { PAGE_ROUTES } from "@/constants/routes";
 
@@ -26,7 +26,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function Options() {
+export default function AddOptions() {
   const { options, setOptions, removeOption } = useOptionsStore();
 
   const form = useForm<FormData>({
@@ -44,6 +44,14 @@ export default function Options() {
       {
         id: uuidv4(),
         title: form.getValues("title"),
+        ratings: {
+          financialCost: 0,
+          levelOfEffort: 0,
+          timeInvestment: 0,
+          risk: 0,
+          shortTermReturn: 0,
+          longTermReturn: 0,
+        },
       },
     ];
 

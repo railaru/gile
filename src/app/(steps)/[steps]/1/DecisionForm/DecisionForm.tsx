@@ -5,11 +5,11 @@ import TextareaGroup from "@/components/ui/Textarea/Textarea";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import BottomNav from "@/app/BottomNav/BottomNav";
+import BottomNav from "@/app/(steps)/[steps]/BottomNav/BottomNav";
 import Button from "@/components/ui/Button/Button";
 import { useRouter } from "next/navigation";
 import { PAGE_ROUTES } from "@/constants/routes";
-import useDecisionsStore from "@/app/store/decisions";
+import useDecisionsStore from "@/app/(steps)/[steps]/store/decisions";
 
 const schema = z.object({
   decision: z

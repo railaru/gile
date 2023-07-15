@@ -15,10 +15,14 @@ const useOptionsStore = create<Store>((set) => ({
     {
       id: "1",
       title: "Lemonade stand",
-    },
-    {
-      id: "2",
-      title: "Shopify store",
+      ratings: {
+        financialCost: 0,
+        levelOfEffort: 0,
+        timeInvestment: 0,
+        risk: 0,
+        shortTermReturn: 0,
+        longTermReturn: 0,
+      },
     },
   ],
   setOptions: (payload) => set({ options: payload }),

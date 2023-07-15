@@ -1,7 +1,7 @@
 import React from "react";
 import Pane from "@/components/ui/Pane/Pane";
 import Examples from "./Examples/Examples";
-import Options from "./Options/Options";
+import Options from "./AddOptions/AddOptions";
 
 export default function Page() {
   return (

@@ -2,6 +2,7 @@ import Pane from "@/components/ui/Pane/Pane";
 import React from "react";
 import Examples from "./Examples/Examples";
 import EvaluateOptions from "./EvaluateOptions/EvaluateOptions";
+import TestForm from "./EvaluateOptions/TestForm";
 
 export default function Page() {
   return (
@@ -19,6 +20,8 @@ export default function Page() {
           </h2>
         </div>
       </Pane>
+
+      <TestForm />
 
       <EvaluateOptions />
     </div>

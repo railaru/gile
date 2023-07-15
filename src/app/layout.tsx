@@ -2,9 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ReactNode } from "react";
-import Header from "@/app/Header/Header";
-import Aside from "./Aside/Aside";
-import RouteChangeAnimation from "./RouteChangeAnimation/RouteChangeAnimation";
+
+import RouteChangeAnimation from "@/app/(steps)/[steps]/RouteChangeAnimation/RouteChangeAnimation";
 
 const matter = localFont({
   variable: "--font-matter",
@@ -68,15 +67,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={matter.variable}>
-        <Header />
-
-        <div className="lg:flex">
-          <Aside />
-
-          <main className="max-w-[800px] mx-auto pt-12">{children}</main>
-        </div>
-
         <RouteChangeAnimation />
+        {children}
       </body>
     </html>
   );
