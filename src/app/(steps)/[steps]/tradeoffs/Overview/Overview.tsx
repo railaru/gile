@@ -51,7 +51,7 @@ export default function Overview() {
 
           <div>
             <h3 className="text-[130px] relative lg:top-[-28px] lg:mb-[-45px]">
-              ⚖️
+              🐢
             </h3>
           </div>
         </div>
@@ -69,8 +69,6 @@ export default function Overview() {
           </ul>
         )}
       </Pane>
-
-      <div className="h-[1000px]"></div>
     </div>
   );
 }

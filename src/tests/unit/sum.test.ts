@@ -1,8 +1,8 @@
-import { describe, expect, test } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 import { sum } from "../../lib/sum";
 
 describe("sum module", () => {
-  test("adds 1 + 2 to equal 3", () => {
+  it("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
   });
 });
