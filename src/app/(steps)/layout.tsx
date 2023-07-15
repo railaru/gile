@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className="lg:flex">
         <Aside />
 
-        <main className="max-w-[800px] mx-auto pt-12">{children}</main>
+        <main className="max-w-[800px] mx-auto py-12">{children}</main>
       </div>
     </>
   );

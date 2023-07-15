@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:unit:watch": "jest --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
@@ -39,5 +40,10 @@
     "uuid": "^9.0.0",
     "zod": "^3.21.4",
     "zustand": "^4.3.9"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.6.1",
+    "jest": "^29.6.1",
+    "ts-jest": "^29.1.1"
   }
 }

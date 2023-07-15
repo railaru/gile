@@ -140,7 +140,7 @@ export default function EvaluateOptions() {
                     error={
                       errors?.options?.[index]?.ratings?.financialCost?.message
                     }
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
 
@@ -159,7 +159,7 @@ export default function EvaluateOptions() {
                     error={
                       errors?.options?.[index]?.ratings?.levelOfEffort?.message
                     }
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
 
@@ -178,7 +178,7 @@ export default function EvaluateOptions() {
                     error={
                       errors?.options?.[index]?.ratings?.timeInvestment?.message
                     }
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
 
@@ -192,7 +192,7 @@ export default function EvaluateOptions() {
                     min={minRating}
                     max={maxRating}
                     error={errors?.options?.[index]?.ratings?.risk?.message}
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
 
@@ -212,7 +212,7 @@ export default function EvaluateOptions() {
                       errors?.options?.[index]?.ratings?.shortTermReturn
                         ?.message
                     }
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
 
@@ -231,7 +231,7 @@ export default function EvaluateOptions() {
                     error={
                       errors?.options?.[index]?.ratings?.longTermReturn?.message
                     }
-                    className="text-sm font-[300] text-center"
+                    className="text-sm font-[300] text-center rounded-none"
                   />
                 </TableCell>
               </TableRow>
