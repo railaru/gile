@@ -1,22 +1,24 @@
 import { Option } from "./../types/options";
 
-export function sortOptionsByLongTermReturnAndRisk(
-  options: Option[]
-): Option[] {
-  return options.sort((a, b) => {
+export function sortOptionsByLongTermReturnAndRisk(options: Option[]) {
+  return options.sort((firstOption, secondOption) => {
     // Sort by descending longTermReturn
-    if (a.ratings.longTermReturn > b.ratings.longTermReturn) {
+    if (
+      firstOption.ratings.longTermReturn > secondOption.ratings.longTermReturn
+    ) {
       return -1;
     }
-    if (a.ratings.longTermReturn < b.ratings.longTermReturn) {
+    if (
+      firstOption.ratings.longTermReturn < secondOption.ratings.longTermReturn
+    ) {
       return 1;
     }
 
     // Sort by ascending risk if longTermReturn is the same
-    if (a.ratings.risk < b.ratings.risk) {
+    if (firstOption.ratings.risk < secondOption.ratings.risk) {
       return -1;
     }
-    if (a.ratings.risk > b.ratings.risk) {
+    if (firstOption.ratings.risk > secondOption.ratings.risk) {
       return 1;
     }
 

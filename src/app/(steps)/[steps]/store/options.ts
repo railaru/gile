@@ -1,5 +1,6 @@
 "use client";
 
+import { mockOptions } from "@/mock/options";
 import { Option } from "@/types/options";
 import { create } from "zustand";
 
@@ -11,20 +12,7 @@ type Store = {
 };
 
 const useOptionsStore = create<Store>((set) => ({
-  options: [
-    {
-      id: "1",
-      title: "Lemonade stand",
-      ratings: {
-        financialCost: 0,
-        levelOfEffort: 0,
-        timeInvestment: 0,
-        risk: 0,
-        shortTermReturn: 0,
-        longTermReturn: 0,
-      },
-    },
-  ],
+  options: mockOptions,
   setOptions: (payload) => set({ options: payload }),
   removeOption: (payload) =>
     set((state) => ({
