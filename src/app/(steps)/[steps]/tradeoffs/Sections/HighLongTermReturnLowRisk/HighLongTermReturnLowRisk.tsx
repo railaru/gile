@@ -17,8 +17,8 @@ import { Option } from "@/types/options";
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
     title: option.title,
-    x: option.ratings.risk,
-    y: option.ratings.longTermReturn,
+    x: option.ratings.longTermReturn,
+    y: option.ratings.risk,
   }));
 }
 
