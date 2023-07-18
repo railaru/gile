@@ -84,7 +84,7 @@ export default function EvaluateOptions() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-16 xl:mr-[-200px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-16 xl:mx-[-100px]">
       <Table>
         <TableHeader>
           <TableRow>
