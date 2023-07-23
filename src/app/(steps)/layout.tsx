@@ -7,6 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
+
       <div className="lg:flex">
         <Aside />
 

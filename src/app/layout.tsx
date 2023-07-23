@@ -68,6 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={matter.variable}>
         <RouteChangeAnimation />
+
         {children}
       </body>
     </html>
