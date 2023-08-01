@@ -3,7 +3,7 @@
 import Pane from "@/components/ui/Pane/Pane";
 import React, { useEffect, useState } from "react";
 import useOptionsStore from "../../../store/options";
-import { sortOptionsByLongTermReturnAndRisk } from "@/lib/tradeoffs";
+import { sortOptionsByRiskWeightedReturn } from "@/lib/tradeoffs";
 import {
   ScatterChart,
   Scatter,
@@ -30,9 +30,10 @@ const CustomTooltip = ({ payload }: any) => {
   );
 };
 
-export default function HighLongTermReturnLowRisk() {
+export default function RiskWeightedReturn() {
   const { options } = useOptionsStore();
-  const sortedOptions = sortOptionsByLongTermReturnAndRisk(options);
+  const riskFreeRate = 0.02;
+  const sortedOptions = sortOptionsByRiskWeightedReturn(options, riskFreeRate);
 
   const [showChart, setShowChart] = useState(false);
 
@@ -41,10 +42,10 @@ export default function HighLongTermReturnLowRisk() {
   }, [options]);
 
   return (
-    <Pane id="long-term-thinking" className="mt-16">
+    <Pane id="risk-weighted-return" className="mt-16">
       <div className="justify-between lg:flex lg:items-start">
         <div>
-          <h1 className="text-2xl font-[300]">Long term thinking</h1>
+          <h1 className="text-2xl font-[300]">Risk weighted return</h1>
 
           <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px] mt-[32px]">
             Your options sorted by lowest risk and highest long term return.

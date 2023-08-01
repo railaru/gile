@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/Form/Form";
-import Input from "@/components/ui/Input/Input";
+import { Input } from "@/components/ui/Input/Input";
 import { useForm } from "react-hook-form";
 
 const formSchema = z.object({

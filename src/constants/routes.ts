@@ -7,7 +7,7 @@ export const PAGE_ROUTES = {
     TRADEOFFS: {
       INDEX: "/steps/tradeoffs",
       HASH_SECTIONS: {
-        LONG_TERM_THINKING: "/steps/tradeoffs#long-term-thinking",
+        RISK_WEIGHTED_RETURN: "/steps/tradeoffs#risk-weighted-return",
         HIGH_REWARD_HIGH_RISK: "/steps/tradeoffs#high-reward-high-risk",
       },
     },

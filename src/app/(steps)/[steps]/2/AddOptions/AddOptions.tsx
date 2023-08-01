@@ -9,7 +9,7 @@ import { PlusIcon } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/ui/Input/Input";
+import { InputGroup } from "@/components/ui/Input/Input";
 import Divider from "@/components/ui/Divider/Divider";
 import BottomNav from "@/app/(steps)/[steps]/BottomNav/BottomNav";
 import Link from "next/link";
@@ -88,7 +88,7 @@ export default function AddOptions() {
       {options.length > 0 && <Divider className="mt-8" />}
 
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex mt-8">
-        <Input
+        <InputGroup
           inputProps={{
             placeholder: "Enter a new option",
             className: "h-[45px] rounded-r-none",

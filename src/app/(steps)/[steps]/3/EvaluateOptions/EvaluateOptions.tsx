@@ -17,7 +17,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/Tooltip/Tooltip";
 import useOptionsStore from "@/app/(steps)/[steps]/store/options";
-import Input from "@/components/ui/Input/Input";
+import { Input } from "@/components/ui/Input/Input";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { tableHeadData } from "./staticData";
 import { z } from "zod";

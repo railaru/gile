@@ -1,8 +1,7 @@
 import React from "react";
 import Cta from "../Cta/Cta";
 import { PAGE_ROUTES } from "@/constants/routes";
-import Pane from "@/components/ui/Pane/Pane";
-import HighLongTermReturnLowRisk from "../Sections/HighLongTermReturnLowRisk/HighLongTermReturnLowRisk";
+import RiskWeightedReturn from "../Sections/RiskWeightedReturn/RiskWeightedReturn";
 
 export default function Overview() {
   return (
@@ -11,11 +10,12 @@ export default function Overview() {
         <div>
           <Cta
             emoji="🐢"
-            title="Long term thinking"
+            title="Risk weighted return"
             description="Slow and steady wins the race. Find tradeoffs that that optimise for long term wins."
             link={{
               title: "Discover",
-              url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.LONG_TERM_THINKING,
+              url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS
+                .RISK_WEIGHTED_RETURN,
             }}
           />
         </div>
@@ -34,7 +34,7 @@ export default function Overview() {
         </div>
       </div>
 
-      <HighLongTermReturnLowRisk />
+      <RiskWeightedReturn />
     </div>
   );
 }

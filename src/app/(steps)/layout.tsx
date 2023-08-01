@@ -11,7 +11,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className="lg:flex">
         <Aside />
 
-        <main className="max-w-[800px] mx-auto pt-12 pb-24">{children}</main>
+        <div className="lg:h-[calc(100vh-50px)] lg:overflow-auto w-full">
+          <main className="max-w-[800px] mx-auto pt-12 pb-24">{children}</main>
+        </div>
       </div>
     </>
   );

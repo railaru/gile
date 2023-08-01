@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/Button/Button";
-import Input from "@/components/ui/Input/Input";
+import { Input } from "@/components/ui/Input/Input";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";

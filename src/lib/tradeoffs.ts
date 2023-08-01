@@ -25,3 +25,31 @@ export function sortOptionsByLongTermReturnAndRisk(options: Option[]) {
     return 0;
   });
 }
+export function sortOptionsByRiskWeightedReturn(
+  options: Option[],
+  riskFreeRate: number
+) {
+  return options.sort((firstOption, secondOption) => {
+    // Calculate risk-weighted return for each option
+    const firstOptionRiskWeightedReturn = calculateRiskWeightedReturn(
+      firstOption,
+      riskFreeRate
+    );
+    const secondOptionRiskWeightedReturn = calculateRiskWeightedReturn(
+      secondOption,
+      riskFreeRate
+    );
+
+    // Sort by descending risk-weighted return
+    return secondOptionRiskWeightedReturn - firstOptionRiskWeightedReturn;
+  });
+}
+
+function calculateRiskWeightedReturn(option: Option, riskFreeRate: number) {
+  // Calculate risk-adjusted return by considering only the "risk" factor
+  const riskFactor = option.ratings.risk;
+  const excessReturn = option.ratings.longTermReturn - riskFreeRate;
+  const riskWeightedReturn = excessReturn - riskFactor;
+
+  return riskWeightedReturn;
+}
