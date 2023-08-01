@@ -1,5 +1,6 @@
 "use client";
 
+import { mockOptions } from "@/mock/options";
 import { Option } from "@/types/options";
 import { create } from "zustand";
 
@@ -11,7 +12,7 @@ type Store = {
 };
 
 const useOptionsStore = create<Store>((set) => ({
-  options: [],
+  options: mockOptions,
   setOptions: (payload) => set({ options: payload }),
   removeOption: (payload) =>
     set((state) => ({

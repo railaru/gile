@@ -36,9 +36,7 @@ export default function AddOptions() {
     },
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const newOptions = [
       ...options,
       {
@@ -89,20 +87,23 @@ export default function AddOptions() {
 
       {options.length > 0 && <Divider className="mt-8" />}
 
-      <form onSubmit={handleSubmit} className="flex flex-col mt-8">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex mt-8">
         <Input
-          {...form.register("title")}
-          placeholder="Enter a new option"
-          className="h-[50px]"
+          inputProps={{
+            placeholder: "Enter a new option",
+            className: "h-[45px] rounded-r-none",
+            onChange: (e) => form.setValue("title", e.target.value),
+            value: form.watch("title"),
+          }}
+          error={form.formState.errors.title?.message}
         />
 
-        <div className="mt-8">
-          <Button type="submit" disabled={!form.formState.isValid}>
-            <PlusIcon className="w-[18px] h-[18px] mr-1.5 relative bottom-[1px]" />
-
-            <span>Add Option</span>
-          </Button>
-        </div>
+        <Button
+          type="submit"
+          className="rounded-l-none whitespace-nowrap h-[45px]"
+        >
+          Add Option
+        </Button>
       </form>
 
       <BottomNav>
