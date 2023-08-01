@@ -55,6 +55,20 @@ export default function Links() {
             Tradeoffs
           </Link>
         </li>
+        <li>
+          <Link
+            href={
+              PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN
+            }
+            className={cn("text-sm font-[300] ml-1", {
+              "text-primary":
+                pathName ===
+                PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN,
+            })}
+          >
+            - Risk weighted return
+          </Link>
+        </li>
       </ul>
     </>
   );
