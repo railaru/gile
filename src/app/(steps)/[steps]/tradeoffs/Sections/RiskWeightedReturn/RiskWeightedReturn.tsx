@@ -71,17 +71,15 @@ export default function RiskWeightedReturn() {
                 #{index + 1} {option.title}
               </h3>
 
-              <div className="max-w-[200px] mt-4 lg:mt-0">
-                <h3 className="text-sm text-neutral-2">
-                  Risk: {option.ratings.risk} of 5
-                </h3>
+              <div className="max-w-[200px] mt-4 lg:mt-0 text-sm text-neutral-2">
+                <h3>Risk: {option.ratings.risk} of 5</h3>
 
                 <Progress
                   value={(option.ratings.risk / 5) * 100}
                   className="h-[4px] mt-2"
                 />
 
-                <h3 className="mt-4 text-sm text-neutral-2">
+                <h3 className="mt-4">
                   Long term return: {option.ratings.longTermReturn} of 5
                 </h3>
 
