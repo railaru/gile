@@ -8,29 +8,6 @@ import { LineChart } from "@tremor/react";
 import { Progress } from "@/components/ui/Progress/Progress";
 import { Option } from "@/types/options";
 
-const chartdata = [
-  {
-    title: 1970,
-    "Long Term Return": 5,
-  },
-  {
-    title: 1971,
-    "Long Term Return": 4,
-  },
-  {
-    title: 1972,
-    "Long Term Return": 3,
-  },
-  {
-    title: 1973,
-    "Long Term Return": 2,
-  },
-  {
-    title: 1974,
-    "Long Term Return": 1,
-  },
-];
-
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
     title: option.title,

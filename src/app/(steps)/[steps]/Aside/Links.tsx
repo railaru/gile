@@ -31,6 +31,10 @@ const tradeoffsLinks = [
     name: "High reward & High risk",
     url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.HIGH_REWARD_HIGH_RISK,
   },
+  {
+    name: "Low hanging fruit",
+    url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.LOW_HANGING_FRUIT,
+  },
 ];
 
 export default function Links() {

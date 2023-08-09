@@ -9,6 +9,7 @@ export const PAGE_ROUTES = {
       HASH_SECTIONS: {
         RISK_WEIGHTED_RETURN: "/steps/tradeoffs#risk-weighted-return",
         HIGH_REWARD_HIGH_RISK: "/steps/tradeoffs#high-reward-high-risk",
+        LOW_HANGING_FRUIT: "/steps/tradeoffs#low-hanging-fruit",
       },
     },
   },

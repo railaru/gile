@@ -7,7 +7,7 @@ import HighRewardHighRisk from "../Sections/HighRewardHighRisk/HighRewardHighRis
 export default function Overview() {
   return (
     <div>
-      <div className="grid gap-8 mt-20 lg:grid-cols-2">
+      <div className="grid gap-8 mt-20 gap-y-16 lg:grid-cols-2">
         <div>
           <Cta
             emoji="🐢"
@@ -30,6 +30,18 @@ export default function Overview() {
               title: "Discover",
               url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS
                 .HIGH_REWARD_HIGH_RISK,
+            }}
+          />
+        </div>
+
+        <div>
+          <Cta
+            emoji="🍍"
+            title="Low hanging fruit"
+            description="Find oppurtinities with low effort and quick wins."
+            link={{
+              title: "Discover",
+              url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.LOW_HANGING_FRUIT,
             }}
           />
         </div>
