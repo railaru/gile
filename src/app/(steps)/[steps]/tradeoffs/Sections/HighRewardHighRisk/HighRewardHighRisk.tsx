@@ -1,44 +1,45 @@
 "use client";
 
 import Pane from "@/components/ui/Pane/Pane";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useOptionsStore from "../../../store/options";
 import { sortOptionsByHighestReturn } from "@/lib/tradeoffs";
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-} from "recharts";
-import { Option } from "@/types/options";
+import { LineChart } from "@tremor/react";
 import { Progress } from "@/components/ui/Progress/Progress";
+import { Option } from "@/types/options";
+
+const chartdata = [
+  {
+    title: 1970,
+    "Long Term Return": 5,
+  },
+  {
+    title: 1971,
+    "Long Term Return": 4,
+  },
+  {
+    title: 1972,
+    "Long Term Return": 3,
+  },
+  {
+    title: 1973,
+    "Long Term Return": 2,
+  },
+  {
+    title: 1974,
+    "Long Term Return": 1,
+  },
+];
 
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
     title: option.title,
-    x: option.ratings.longTermReturn,
-    y: option.ratings.risk,
+    "Long Term Return": option.ratings.longTermReturn,
   }));
 }
 
-const CustomTooltip = ({ payload }: any) => {
-  return (
-    <div className="bg-white rounded-[4px] shadow-sm p-2 text-sm">
-      {payload && payload[0]?.payload?.title}
-    </div>
-  );
-};
-
 export default function RiskWeightedReturn() {
   const { options } = useOptionsStore();
-
-  const [showChart, setShowChart] = useState(false);
-
-  useEffect(() => {
-    setShowChart(true);
-  }, [options]);
 
   const sortedOptions = sortOptionsByHighestReturn(options);
 
@@ -93,32 +94,14 @@ export default function RiskWeightedReturn() {
         </ul>
       )}
 
-      {showChart && (
-        <div className="relative px-4 pt-8 pb-10 mt-8 bg-white rounded-[4px]">
-          <h3 className="relative text-sm left-[64px] text-neutral-2">Risk</h3>
-
-          <h3 className="absolute bottom-6 text-sm right-[27px] text-neutral-2">
-            Returns
-          </h3>
-
-          <div className="overflow-auto">
-            <ScatterChart width={640} height={400} className="overflow-auto">
-              <CartesianGrid />
-
-              <XAxis type="number" dataKey="x" name="Risk" />
-
-              <YAxis type="number" dataKey="y" name="Returns" />
-
-              <Tooltip content={<CustomTooltip />} />
-
-              <Scatter
-                data={formatOptionsForChart(sortedOptions)}
-                fill="#00d369"
-              />
-            </ScatterChart>
-          </div>
-        </div>
-      )}
+      <LineChart
+        className="p-6 mt-6 bg-white rounded-[4px]"
+        data={formatOptionsForChart(sortedOptions)}
+        index="title"
+        categories={["Long Term Return"]}
+        colors={["emerald", "gray"]}
+        yAxisWidth={40}
+      />
     </Pane>
   );
 }
