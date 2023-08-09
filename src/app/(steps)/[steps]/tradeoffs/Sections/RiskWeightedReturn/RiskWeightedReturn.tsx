@@ -1,44 +1,23 @@
 "use client";
 
 import Pane from "@/components/ui/Pane/Pane";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useOptionsStore from "../../../store/options";
 import { sortOptionsByRiskWeightedReturn } from "@/lib/tradeoffs";
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-} from "recharts";
 import { Option } from "@/types/options";
 import { Progress } from "@/components/ui/Progress/Progress";
+import { ScatterChart } from "@tremor/react";
 
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
     title: option.title,
-    x: option.ratings.longTermReturn,
-    y: option.ratings.risk,
+    Returns: option.ratings.longTermReturn,
+    Risk: option.ratings.risk,
   }));
 }
 
-const CustomTooltip = ({ payload }: any) => {
-  return (
-    <div className="bg-white rounded-[4px] shadow-sm p-2 text-sm">
-      {payload && payload[0]?.payload?.title}
-    </div>
-  );
-};
-
 export default function RiskWeightedReturn() {
   const { options } = useOptionsStore();
-
-  const [showChart, setShowChart] = useState(false);
-
-  useEffect(() => {
-    setShowChart(true);
-  }, [options]);
 
   const sortedOptions = sortOptionsByRiskWeightedReturn(options);
 
@@ -49,7 +28,7 @@ export default function RiskWeightedReturn() {
           <h1 className="text-2xl font-[300]">Risk weighted return</h1>
 
           <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px] mt-[32px]">
-            Your options sorted by highest long terum return with lowest risk.
+            Your options sorted by highest long term return with lowest risk.
           </h2>
         </div>
 
@@ -93,32 +72,22 @@ export default function RiskWeightedReturn() {
         </ul>
       )}
 
-      {showChart && (
-        <div className="relative px-4 pt-8 pb-10 mt-8 bg-white rounded-[4px]">
-          <h3 className="relative text-sm left-[64px] text-neutral-2">Risk</h3>
+      <div className="relative mt-6 bg-white rounded-[4px] p-6 pb-10">
+        <h3 className="text-sm text-neutral-2">Risk</h3>
 
-          <h3 className="absolute bottom-6 text-sm right-[27px] text-neutral-2">
-            Returns
-          </h3>
+        <ScatterChart
+          className="mt-4"
+          yAxisWidth={50}
+          data={formatOptionsForChart(sortedOptions)}
+          category="title"
+          x="Returns"
+          y="Risk"
+          showOpacity={true}
+          showLegend={false}
+        />
 
-          <div className="overflow-auto">
-            <ScatterChart width={640} height={400} className="overflow-auto">
-              <CartesianGrid />
-
-              <XAxis type="number" dataKey="x" name="Risk" />
-
-              <YAxis type="number" dataKey="y" name="Returns" />
-
-              <Tooltip content={<CustomTooltip />} />
-
-              <Scatter
-                data={formatOptionsForChart(sortedOptions)}
-                fill="#00d369"
-              />
-            </ScatterChart>
-          </div>
-        </div>
-      )}
+        <h3 className="absolute text-sm right-7 text-neutral-2">Reward</h3>
+      </div>
     </Pane>
   );
 }
