@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Option } from "@/types/options";
-import { Progress } from "@/components/ui/Progress/progress";
+import { Progress } from "@/components/ui/Progress/Progress";
 
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
