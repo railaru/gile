@@ -22,6 +22,17 @@ const links = [
   },
 ];
 
+const tradeoffsLinks = [
+  {
+    name: "Risk weighted return",
+    url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN,
+  },
+  {
+    name: "High reward & High risk",
+    url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.HIGH_REWARD_HIGH_RISK,
+  },
+];
+
 export default function Links() {
   const pathName = usePathname();
 
@@ -55,20 +66,19 @@ export default function Links() {
             Tradeoffs
           </Link>
         </li>
-        <li>
-          <Link
-            href={
-              PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN
-            }
-            className={cn("text-sm font-[300] ml-1", {
-              "text-primary":
-                pathName ===
-                PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN,
-            })}
-          >
-            - Risk weighted return
-          </Link>
-        </li>
+
+        {tradeoffsLinks.map((link, index) => (
+          <li key={index}>
+            <Link
+              href={link.url}
+              className={cn("text-sm font-[300]", {
+                "text-primary": pathName === link.url,
+              })}
+            >
+              - {link.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </>
   );

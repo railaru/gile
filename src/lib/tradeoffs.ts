@@ -21,3 +21,11 @@ function calculateRiskWeightedReturn(option: Option) {
 
   return riskWeightedReturn;
 }
+
+export function sortOptionsByHighestReturn(options: Option[]) {
+  return options.sort((firstOption, secondOption) => {
+    return (
+      secondOption.ratings.longTermReturn - firstOption.ratings.longTermReturn
+    );
+  });
+}

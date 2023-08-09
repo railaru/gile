@@ -2,6 +2,7 @@ import React from "react";
 import Cta from "../Cta/Cta";
 import { PAGE_ROUTES } from "@/constants/routes";
 import RiskWeightedReturn from "../Sections/RiskWeightedReturn/RiskWeightedReturn";
+import HighRewardHighRisk from "../Sections/HighRewardHighRisk/HighRewardHighRisk";
 
 export default function Overview() {
   return (
@@ -23,8 +24,8 @@ export default function Overview() {
         <div>
           <Cta
             emoji="🎸"
-            title="High reward & risky opportunities"
-            description="Find oppurtinities optimised for the biggest review while ignoring the risk."
+            title="High reward & High risk"
+            description="Find oppurtinities optimised for the biggest reward while ignoring the risk."
             link={{
               title: "Discover",
               url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS
@@ -35,6 +36,8 @@ export default function Overview() {
       </div>
 
       <RiskWeightedReturn />
+
+      <HighRewardHighRisk />
     </div>
   );
 }
