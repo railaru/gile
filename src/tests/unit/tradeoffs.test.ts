@@ -2,6 +2,7 @@ import { describe, expect, it } from "@jest/globals";
 import {
   sortOptionsByRiskWeightedReturn,
   sortOptionsByHighestReturn,
+  sortOptionsByLowestHangingFruit,
 } from "../../lib/tradeoffs";
 import { mockOptions } from "../../mock/options";
 
@@ -34,5 +35,17 @@ describe("sortOptionsByHighestReturn", () => {
     expect(sortedOptions[5].title).toBe("Lemonade Stand");
     expect(sortedOptions[5].ratings.longTermReturn).toBe(1);
     expect(sortedOptions[5].ratings.risk).toBe(1);
+  });
+});
+
+describe("sortOptionsByLowestHangingFruit", () => {
+  it("should sort options based on the three-step process: low time commitment, low time investment, and high short-term return", () => {
+    const sortedOptions = sortOptionsByLowestHangingFruit(mockOptions);
+
+    // Expected sorted option IDs
+    const expectedIds = ["2", "1", "6", "4", "5", "3"];
+
+    const sortedOptionIds = sortedOptions.map((option) => option.id);
+    expect(sortedOptionIds).toEqual(expectedIds);
   });
 });

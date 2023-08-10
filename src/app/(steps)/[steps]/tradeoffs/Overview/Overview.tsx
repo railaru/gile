@@ -3,6 +3,7 @@ import Cta from "../Cta/Cta";
 import { PAGE_ROUTES } from "@/constants/routes";
 import RiskWeightedReturn from "../Sections/RiskWeightedReturn/RiskWeightedReturn";
 import HighRewardHighRisk from "../Sections/HighRewardHighRisk/HighRewardHighRisk";
+import LowHangingFruit from "../Sections/LowHangingFruit/LowHangingFruit";
 
 export default function Overview() {
   return (
@@ -50,6 +51,8 @@ export default function Overview() {
       <RiskWeightedReturn />
 
       <HighRewardHighRisk />
+
+      <LowHangingFruit />
     </div>
   );
 }

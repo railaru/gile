@@ -3,37 +3,39 @@
 import Pane from "@/components/ui/Pane/Pane";
 import React from "react";
 import useOptionsStore from "../../../store/options";
-import { sortOptionsByHighestReturn } from "@/lib/tradeoffs";
-import { LineChart } from "@tremor/react";
-import { Progress } from "@/components/ui/Progress/Progress";
+import { sortOptionsByLowestHangingFruit } from "@/lib/tradeoffs";
 import { Option } from "@/types/options";
+import { Progress } from "@/components/ui/Progress/Progress";
+import { ScatterChart } from "@tremor/react";
 
 function formatOptionsForChart(options: Option[]) {
   return options.map((option) => ({
     title: option.title,
-    "Long Term Return": option.ratings.longTermReturn,
+    Returns: option.ratings.longTermReturn,
+    Risk: option.ratings.risk,
   }));
 }
 
-export default function HighRewardHighRisk() {
+export default function LowHangingFruit() {
   const { options } = useOptionsStore();
 
-  const sortedOptions = sortOptionsByHighestReturn(options);
+  const sortedOptions = sortOptionsByLowestHangingFruit(options);
 
   return (
-    <Pane id="high-reward-high-risk" className="mt-16">
+    <Pane id="low-hanging-fruit" className="mt-16">
       <div className="justify-between lg:flex lg:items-start">
         <div>
-          <h1 className="text-2xl font-[300]">High reward & High risk</h1>
+          <h1 className="text-2xl font-[300]">Low hanging fruit</h1>
 
           <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px] mt-[32px]">
-            Your options sorted by highest long term return ignoring risk.
+            Your options sorted by Low effort, Low time commitment and High
+            short term return.
           </h2>
         </div>
 
         <div>
           <h3 className="text-[130px] relative lg:top-[-28px] lg:mb-[-45px]">
-            🎸
+            🍍
           </h3>
         </div>
       </div>
@@ -50,7 +52,7 @@ export default function HighRewardHighRisk() {
               </h3>
 
               <div className="max-w-[200px] mt-4 lg:mt-0 text-sm text-neutral-2">
-                <h3>Risk: {option.ratings.risk} of 5</h3>
+                <h3>Effort: {option.ratings.levelOfEffort} of 5</h3>
 
                 <Progress
                   value={(option.ratings.risk / 5) * 100}
@@ -58,11 +60,20 @@ export default function HighRewardHighRisk() {
                 />
 
                 <h3 className="mt-4">
-                  Long term return: {option.ratings.longTermReturn} of 5
+                  Time investment: {option.ratings.timeInvestment} of 5
                 </h3>
 
                 <Progress
-                  value={(option.ratings.longTermReturn / 5) * 100}
+                  value={(option.ratings.timeInvestment / 5) * 100}
+                  className="h-[4px] mt-2"
+                />
+
+                <h3 className="mt-4">
+                  Short term return: {option.ratings.shortTermReturn} of 5
+                </h3>
+
+                <Progress
+                  value={(option.ratings.shortTermReturn / 5) * 100}
                   className="h-[4px] mt-2"
                 />
               </div>
@@ -70,15 +81,6 @@ export default function HighRewardHighRisk() {
           ))}
         </ul>
       )}
-
-      <LineChart
-        className="p-6 mt-6 bg-white rounded-[4px]"
-        data={formatOptionsForChart(sortedOptions)}
-        index="title"
-        categories={["Long Term Return"]}
-        colors={["emerald", "gray"]}
-        yAxisWidth={40}
-      />
     </Pane>
   );
 }
