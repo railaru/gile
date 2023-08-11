@@ -20,7 +20,7 @@ const schema = z.object({
     .string()
     .min(3, { message: "An option should be at least 3 character long." })
     .max(60, {
-      message: "A deoptioncision should be at most 60 characters long.",
+      message: "A description should be at most 60 characters long.",
     }),
 });
 
