@@ -17,7 +17,6 @@ function formatOptionsForChart(options: Option[]) {
 
 export default function HighRewardHighRisk() {
     const { options } = useOptionsStore();
-
     const sortedOptions = sortOptionsByHighestReturn(options);
 
     return (
