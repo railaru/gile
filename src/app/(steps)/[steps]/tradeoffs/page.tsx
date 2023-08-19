@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Page() {
     return (
-        <div className="px-4">
+        <div>
             <Pane className="justify-between lg:flex lg:items-start">
                 <div>
                     <h1 className="text-2xl font-[300]">
@@ -17,7 +17,7 @@ export default function Page() {
                         </span>
                     </h1>
 
-                    <h2 className="text-xl font-[300] text-neutral-2 max-w-[360px] mt-[32px]">
+                    <h2 className="lg:text-xl font-[300] text-neutral-2 max-w-[360px] mt-[32px]">
                         Pick the best option the based on tradeoffs that are the most
                         important to you.
                     </h2>

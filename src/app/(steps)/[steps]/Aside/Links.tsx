@@ -3,7 +3,7 @@
 import React, { HTMLAttributes } from 'react';
 import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Divider from '@/components/ui/Divider/Divider';
 
@@ -43,6 +43,9 @@ const tradeoffsLinks = [
 type Props = HTMLAttributes<HTMLElement>;
 export default function Links(props: Props) {
     const pathName = usePathname();
+    const params = useSearchParams();
+
+    console.log(params);
 
     return (
         <div {...props}>

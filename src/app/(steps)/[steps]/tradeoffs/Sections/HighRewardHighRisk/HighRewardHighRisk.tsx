@@ -80,7 +80,7 @@ export default function HighRewardHighRisk() {
             )}
 
             <LineChart
-                className="p-6 mt-6 bg-white rounded-[4px]"
+                className="p-2 lg:p-6 mt-6 bg-white rounded-[4px]"
                 data={formatOptionsForChart(sortedOptions)}
                 index="title"
                 categories={['Long Term Return']}

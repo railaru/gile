@@ -39,7 +39,7 @@ export default function Overview() {
     return (
         <div>
             <div
-                className="flex overflow-auto lg:overflow-visible flex-row flex-nowrap lg:grid gap-8 mt-20 lg:gap-y-16 lg:grid-cols-2">
+                className="flex overflow-auto lg:overflow-visible flex-row flex-nowrap lg:grid gap-8 mt-12 lg:mt-20 lg:gap-y-16 lg:grid-cols-2">
                 {
                     mockData.map((item, index) => (
                         <div className="min-w-[300px] lg:min-w-full" key={index}>

@@ -22,7 +22,7 @@ export default function RiskWeightedReturn() {
     const sortedOptions = sortOptionsByRiskWeightedReturn(options);
 
     return (
-        <Pane id="risk-weighted-return" className="mt-16">
+        <Pane id="risk-weighted-return" className="mt-12 lg:mt-16">
             <div className="justify-between lg:flex lg:items-start">
                 <div>
                     <h1 className="text-2xl font-[300]">
@@ -73,6 +73,7 @@ export default function RiskWeightedReturn() {
                                 <Progress
                                     value={(option.ratings.longTermReturn / 5) * 100}
                                     className="h-[4px] mt-2"
+
                                 />
                             </div>
                         </li>
