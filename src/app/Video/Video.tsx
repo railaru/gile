@@ -1,7 +1,7 @@
 export default function Video() {
     return (
         <div className="mt-24 lg:mt-32">
-            <h3 className="text-4xl">
+            <h3 className="text-3xl lg:text-4xl">
                 See it in action:
             </h3>
 

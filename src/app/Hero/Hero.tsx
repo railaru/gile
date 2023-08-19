@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="lg:flex space-y-12 lg:space-y-0 lg:space-x-10 mt-24 lg:mt-32">
             <div>
                 <div>
-                    <h1 className="text-3xl lg:text-[58px] font-medium lg:leading-[70px] lg:max-w-[450px]">
+                    <h1 className="text-4xl lg:text-[58px] font-medium lg:leading-[70px] lg:max-w-[450px]">
                         Helping people make better decisions
                     </h1>
                 </div>

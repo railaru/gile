@@ -24,13 +24,13 @@ const data = [
 export default function BlogSection() {
     return (
         <div className="mt-24 lg:mt-32">
-            <h3 className="text-4xl">
+            <h3 className="text-3xl lg:text-4xl">
                 Blog section
             </h3>
 
-            <h4 className="text-neutral-2 text-3xl mt-4 font-light">Read about how this app was made.</h4>
+            <h4 className="text-neutral-2 text-2xl lg:text-3xl mt-4 font-light">Read about how this app was made.</h4>
 
-            <ul className="flex overflow-auto mt-16 space-x-8">
+            <ul className="sm:grid sm:grid-cols-2 mt-16 gap-8 lg:grid-cols-3">
                 {data.map((item, index) => (
                     <li key={index}>
                         <Card {...item}/>
@@ -53,14 +53,25 @@ function Card({ label, title, href, imgSrc }: Props) {
         <a
             href={href}
             target={'_blank'} rel={'noreferrer'}
-            className="w-[400px] block bg-neutral-7/50 p-2 rounded-[4px] pb-4"
+            className="block bg-neutral-7/50 p-2 rounded-[4px] pb-4"
         >
-            <Image src={imgSrc} alt={title} width={400} height={600} className="object-contain object-center"/>
+            <Image
+                src={imgSrc}
+                alt={title}
+                width={400}
+                height={600}
+                className="object-contain object-center"
+                sizes="100vw"
+                style={{
+                    width: '100%',
+                    height: 'auto',
+                }}
+            />
 
             <div className="p-2">
                 <h4 className="text-neutral-2 text-lg font-light mt-6">{label}</h4>
 
-                <h3 className="text-3xl mt-4">{title}</h3>
+                <h3 className="text-2xl lg:text-3xl mt-4">{title}</h3>
             </div>
         </a>
     );
