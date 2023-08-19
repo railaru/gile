@@ -4,6 +4,7 @@ import Hero from '@/app/Hero/Hero';
 import InfoBlock from '@/app/InfoBlock/InfoBlock';
 import Video from '@/app/Video/Video';
 import Footer from '@/app/Footer/Footer';
+import BlogSection from '@/app/BlogSection/BlogSection';
 
 export default function Page() {
     return (
@@ -15,6 +16,8 @@ export default function Page() {
             <InfoBlock/>
 
             <Video/>
+
+            <BlogSection/>
 
             <Footer/>
         </div>
