@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@/components/ui/Button/Button";
 import useOptionsStore from "@/app/(steps)/[steps]/store/options";
 import { Option } from "@/types/options";
-import { PlusIcon } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
