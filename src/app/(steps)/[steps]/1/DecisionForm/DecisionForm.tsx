@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextareaGroup from '@/components/ui/Textarea/Textarea';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,6 +35,10 @@ export default function DecisionForm() {
         setDecision(form.decision);
         router.push(PAGE_ROUTES.STEPS[2]);
     };
+
+    useEffect(() => {
+        form.setValue('decision', decision);
+    }, [decision]);
 
     return (
         <form onSubmit={form.handleSubmit(handleSubmit)}>
