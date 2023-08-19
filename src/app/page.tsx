@@ -13,7 +13,7 @@ export default function Page() {
         <div className="px-4 max-w-[1142px] mx-auto">
             <Header/>
 
-            <Hero/>
+            <Hero className="mt-24 lg:mt-32"/>
 
             <InfoBlock/>
 

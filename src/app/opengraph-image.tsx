@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/server';
+import Hero from '@/app/Hero/Hero';
 
 // Route segment config
 export const runtime = 'edge';
@@ -18,19 +19,7 @@ export default async function Image() {
     return new ImageResponse(
         (
             // ImageResponse JSX element
-            <div
-                style={{
-                    fontSize: 128,
-                    background: 'white',
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                About Acme
-            </div>
+            <Hero/>
         ),
         // ImageResponse options
         {
