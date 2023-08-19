@@ -15,7 +15,7 @@ export default function Page() {
                     </div>
 
                     <h2 className="lg:text-xl font-[300] text-neutral-2 max-w-[360px]">
-                        Add what options do you have for making your decision.
+                        Add at least two options you can take to solve your problem.
                     </h2>
 
                     <Options/>

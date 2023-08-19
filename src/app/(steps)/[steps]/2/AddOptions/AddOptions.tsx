@@ -110,7 +110,7 @@ export default function AddOptions() {
                     <Link href={PAGE_ROUTES.STEPS[1]}>Go back</Link>
                 </Button>
 
-                {options.length > 0 && (
+                {options.length > 1 && (
                     <Button type="button" asChild className="ml-4">
                         <Link href={PAGE_ROUTES.STEPS[3]}>Continue</Link>
                     </Button>
