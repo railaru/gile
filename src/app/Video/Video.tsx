@@ -11,7 +11,7 @@ export default function Video() {
                 <video
                     width="100%"
                     height="100%"
-                    src="/assets/video/homepage/demo-video-mobile.mov"
+                    src="/assets/video/homepage/demo-video-mobile.mp4"
                     className="absolute top-0 left-0 w-full h-full"
                     autoPlay
                     muted
@@ -25,7 +25,7 @@ export default function Video() {
                 <video
                     width="100%"
                     height="100%"
-                    src="/assets/video/homepage/demo-video.mov"
+                    src="/assets/video/homepage/demo-video.mp4"
                     className="absolute top-0 left-0 w-full h-full"
                     autoPlay
                     muted
