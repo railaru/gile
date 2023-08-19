@@ -11,11 +11,13 @@ import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/constants/routes';
 import useDecisionStore from '@/app/(steps)/[steps]/store/decision';
 
+const maxCharacterCount = 70;
+
 const schema = z.object({
     decision: z
     .string()
     .min(6, { message: 'A decision should be at least 6 characters long.' })
-    .max(60, { message: 'A decision should be at most 60 characters long.' }),
+    .max(maxCharacterCount, { message: `A decision should be at most ${maxCharacterCount} characters long.` }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -29,6 +31,7 @@ export default function DecisionForm() {
         defaultValues: {
             decision,
         },
+        mode: 'onChange',
     });
 
     const handleSubmit = (form: FormData) => {
@@ -52,7 +55,7 @@ export default function DecisionForm() {
                 }}
                 error={form.formState.errors.decision?.message}
                 currentCharacterCount={form.watch('decision')?.length}
-                maxCharacterCount={60}
+                maxCharacterCount={maxCharacterCount}
             />
 
             <BottomNav>

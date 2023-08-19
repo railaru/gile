@@ -46,7 +46,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function EvaluateOptions() {
     const router = useRouter();
-    const { options, setOptions } = useOptionsStore();
+    const { options, setOptions, setOptionsAreValidated } = useOptionsStore();
 
     const {
         control,
@@ -68,6 +68,7 @@ export default function EvaluateOptions() {
 
     const onSubmit = (data: FormData) => {
         setOptions(data.options);
+        setOptionsAreValidated(true);
         router.push(PAGE_ROUTES.STEPS.TRADEOFFS.INDEX);
     };
 
@@ -229,11 +230,11 @@ export default function EvaluateOptions() {
             </Table>
 
             <BottomNav>
-                <Button variant="ghost" type="button" asChild className="mr-4">
+                <Button variant="ghost" type="button" asChild>
                     <Link href={PAGE_ROUTES.STEPS[2]}>Go back</Link>
                 </Button>
 
-                <Button type="submit">Continue</Button>
+                <Button type="submit" className="ml-4">Continue</Button>
             </BottomNav>
         </form>
     );
