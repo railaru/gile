@@ -2,6 +2,7 @@ export const PAGE_ROUTES = {
     HOME: '/',
     SIGN_UP: '/sign-up',
     SIGN_IN: '/sign-in',
+    DASHBOARD: '/dashboard',
     STEPS: {
         '1': '/steps/1',
         '2': '/steps/2',

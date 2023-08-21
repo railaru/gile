@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
-import Header from '@/app/(steps)/[steps]/Header/Header';
+import DashboardHeader from '@/app/DashboardHeader/DashboardHeader';
 import Aside from '@/app/(steps)/[steps]/Aside/Aside';
 
 export default function Layout({ children }: { children: ReactNode }) {
     return (
         <>
-            <Header/>
+            <DashboardHeader/>
 
             <div className="lg:flex">
                 <Aside/>
