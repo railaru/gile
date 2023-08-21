@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
 import React, { HTMLAttributes } from 'react';
-import Chart from '@/app/Hero/Chart';
+import Chart from '@/app/Components/Hero/Chart';
 
 type Props = HTMLAttributes<HTMLElement>;
 export default function Hero(props: Props) {

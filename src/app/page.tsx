@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '@/app/Header/Header';
-import Hero from '@/app/Hero/Hero';
-import InfoBlock from '@/app/InfoBlock/InfoBlock';
-import Video from '@/app/Video/Video';
-import Footer from '@/app/Footer/Footer';
-import BlogSection from '@/app/BlogSection/BlogSection';
+import Header from '@/app/Components/Header/Header';
+import Hero from '@/app/Components/Hero/Hero';
+import InfoBlock from '@/app/Components/InfoBlock/InfoBlock';
+import Video from '@/app/Components/Video/Video';
+import Footer from '@/app/Components/Footer/Footer';
+import BlogSection from '@/app/Components/BlogSection/BlogSection';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
 

@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 import RouteChangeAnimation from '@/app/(steps)/[steps]/RouteChangeAnimation/RouteChangeAnimation';
 import { ClerkProvider } from '@clerk/nextjs';
+import ConvexClientProvider from '@/app/Providers/ConvexClientProvider';
 
 const matter = localFont({
     variable: '--font-matter',
@@ -67,13 +68,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
-            <html lang="en">
-            <body className={matter.variable}>
-            <RouteChangeAnimation/>
+            <ConvexClientProvider>
+                <html lang="en">
+                <body className={matter.variable}>
+                <RouteChangeAnimation/>
 
-            {children}
-            </body>
-            </html>
+                {children}
+                </body>
+                </html>
+            </ConvexClientProvider>
         </ClerkProvider>
     );
 }

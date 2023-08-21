@@ -1,5 +1,5 @@
 import React from 'react';
-import IconLogo from '../../components/ui/Logo/IconLogo';
+import IconLogo from '../../../components/ui/Logo/IconLogo';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
 import HamburgerMenu from './HamburgerMenu';
