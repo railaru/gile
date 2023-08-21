@@ -7,7 +7,9 @@ import { UserButton } from '@clerk/nextjs';
 
 export default function DashboardHeader() {
     return (
-        <header className="px-4 lg:px-8 py-[10.5px] border-b border-neutral-6 flex items-center justify-between">
+        <header
+            className="px-4 lg:px-8 py-[10.5px] h-[54px] border-b border-neutral-6 flex items-center justify-between"
+        >
             <Link href={PAGE_ROUTES.HOME}>
                 <IconLogo className="w-[28px] h-[28px] fill-black"/>
             </Link>
