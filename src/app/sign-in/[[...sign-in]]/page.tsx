@@ -1,4 +1,4 @@
-import { SignUp } from '@clerk/nextjs';
+import { SignIn } from '@clerk/nextjs';
 import Header from '@/app/Header/Header';
 
 export default function Page() {
@@ -7,7 +7,7 @@ export default function Page() {
             <Header/>
 
             <div className="flex justify-center">
-                <SignUp/>
+                <SignIn/>
             </div>
         </div>
     );
