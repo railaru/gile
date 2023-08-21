@@ -5,7 +5,7 @@ import Aside from '@/app/(steps)/[steps]/Aside/Aside';
 export default function Layout({ children }: { children: ReactNode }) {
     return (
         <>
-            <DashboardHeader/>
+            <DashboardHeader showHamburgerMenu/>
 
             <div className="lg:flex">
                 <Aside/>

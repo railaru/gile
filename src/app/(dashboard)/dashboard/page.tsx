@@ -1,11 +1,12 @@
 'use client';
 
 import DashboardHeader from '@/app/Components/DashboardHeader/DashboardHeader';
-import { useQuery } from 'convex/react';
+import { useConvexAuth, useQuery } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 
 export default function Page() {
     const decisions = useQuery(api.decisions.get);
+    const { isLoading, isAuthenticated } = useConvexAuth();
 
     return (
         <div>
@@ -15,6 +16,10 @@ export default function Page() {
                 {
                     decisions?.map((decision) => <p key={decision._id}>{decision.decision}</p>)
                 }
+            </div>
+
+            <div>
+                {isAuthenticated ? 'Logged in' : 'Logged out or still loading'}
             </div>
         </div>
     );
