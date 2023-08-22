@@ -7,6 +7,7 @@ import useStoreUserEffect from '@/hooks/useStoreUserEffect';
 import { useState } from 'react';
 import { Input } from '@/components/ui/Input/Input';
 import Button from '@/components/ui/Button/Button';
+import { Id } from '../../../../convex/_generated/dataModel';
 
 export default function Page() {
     const { isAuthenticated } = useConvexAuth();
@@ -15,11 +16,16 @@ export default function Page() {
     const [decision, setDecision] = useState('');
 
     const addDecision = useMutation(api.decisions.add);
+    const deleteDecision = useMutation(api.decisions.deleteById);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
         addDecision({ decision });
+    };
+
+    const handleDelete = (_id: Id<'decisions'>) => {
+        deleteDecision({ _id });
     };
 
     return (
@@ -45,9 +51,17 @@ export default function Page() {
                     </Button>
                 </form>
 
-                <div>
+                <div className="space-y-4">
                     {
-                        decisions?.map((decision) => <p key={decision._id}>{decision.decision}</p>)
+                        decisions?.map((decision) => (
+                            <div key={decision._id} className="flex items-center space-x-4">
+                                <p>{decision.decision}</p>
+
+                                <Button variant="destructive" type="button" onClick={() => handleDelete(decision._id)}>
+                                    Delete
+                                </Button>
+                            </div>
+                        ))
                     }
                 </div>
 

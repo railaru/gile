@@ -32,3 +32,18 @@ export const add = mutation({
         });
     }
 });
+
+export const deleteById = mutation({
+    args: {
+        _id: v.id('decisions'),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity === null) {
+            throw new Error('Called deleteDecision without authentication present');
+        }
+
+        return await ctx.db.delete(args._id);
+    }
+});
