@@ -21,7 +21,7 @@ export default function List() {
     const deleteDecision = useMutation(api.decisions.deleteById);
 
     const handleDelete = (_id: Id<'decisions'>) => {
-        deleteDecision({ _id });
+        deleteDecision({ _id }); // todo handle error with toast
     };
 
     return <>
@@ -31,7 +31,7 @@ export default function List() {
                     <li key={item._id} className="bg-neutral-7/50 rounded-[4px] p-4 lg:p-7 relative">
                         <DropdownMenu>
                             <DropdownMenuTrigger
-                                className="absolute right-3 top-3 rounded-full hover:bg-neutral-6/50 h-7 w-7 inline-flex items-center justify-center transition"
+                                className="absolute right-3 top-2 rounded-full hover:bg-neutral-6/50 h-7 w-7 inline-flex items-center justify-center transition"
                                 onClick={() => handleDelete(item._id)}
                             >
                                 <MoreHorizontal className="w-5 h-5 text-neutral-2"/>

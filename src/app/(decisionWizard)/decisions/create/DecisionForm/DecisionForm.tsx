@@ -10,13 +10,15 @@ import Button from '@/components/ui/Button/Button';
 import { useRouter } from 'next/navigation';
 import { PAGE_ROUTES } from '@/constants/routes';
 import useDecisionStore from '@/app/(decisionWizard)/store/decision';
+import { useMutation } from 'convex/react';
+import { api } from '../../../../../../convex/_generated/api';
 
 const maxCharacterCount = 70;
 
 const schema = z.object({
     decision: z
     .string()
-    .min(6, { message: 'A decisions should be at least 6 characters long.' })
+    .min(6, { message: 'A decision should be at least 6 characters long.' })
     .max(maxCharacterCount, { message: `A decision should be at most ${maxCharacterCount} characters long.` }),
 });
 
@@ -25,6 +27,8 @@ type FormData = z.infer<typeof schema>;
 export default function DecisionForm() {
     const router = useRouter();
     const { decision, setDecision } = useDecisionStore();
+
+    const addDecision = useMutation(api.decisions.add);
 
     const form = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -35,13 +39,14 @@ export default function DecisionForm() {
     });
 
     const handleSubmit = (form: FormData) => {
-        setDecision(form.decision);
-        router.push(PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')); // todo: replace with decision id from db
+        addDecision({ decision: form.decision }).then((decisionId) => {
+            router.push(PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId));
+        });
     };
 
     useEffect(() => {
         form.setValue('decision', decision);
-    }, [decision]);
+    }, [decision, form]);
 
     return (
         <form onSubmit={form.handleSubmit(handleSubmit)}>
