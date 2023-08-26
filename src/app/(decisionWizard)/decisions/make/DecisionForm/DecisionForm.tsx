@@ -7,10 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Button from '@/components/ui/Button/Button';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { PAGE_ROUTES } from '@/constants/routes';
 import useDecisionStore from '@/app/(decisionWizard)/store/decision';
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../../../../convex/_generated/api';
 
 const maxCharacterCount = 70;
@@ -26,7 +26,13 @@ type FormData = z.infer<typeof schema>;
 
 export default function DecisionForm() {
     const router = useRouter();
-    const { decision, setDecision } = useDecisionStore();
+    const params = useSearchParams();
+    const decisionId = params.get('id');
+    const storedDecision = useQuery(api.decisions.getById, { _id: decisionId || '' });
+
+    console.log({ storedDecision });
+
+    const { decision } = useDecisionStore();
 
     const addDecision = useMutation(api.decisions.add);
 

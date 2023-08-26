@@ -107,7 +107,7 @@ export default function AddOptions() {
 
             <BottomNav>
                 <Button variant="ghost" type="button" asChild>
-                    <Link href={PAGE_ROUTES.DECISIONS.CREATE}>Go back</Link>
+                    <Link href={PAGE_ROUTES.DECISIONS.MAKE()}>Go back</Link>
                 </Button>
 
                 {options.length > 1 && (

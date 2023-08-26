@@ -4,7 +4,7 @@ export const PAGE_ROUTES = {
     SIGN_IN: '/sign-in',
     DASHBOARD: '/dashboard',
     DECISIONS: {
-        CREATE: '/decisions/create',
+        MAKE: (id?: string) => id ? `/decisions/make?id=${id}` : '/decisions/make',
         DEFINE_OPTIONS: (id: string) => `/decisions/${id}/define-options`,
         EVALUATE_OPTIONS: (id: string) => `/decisions/${id}/evaluate-options`,
         TRADEOFFS: {

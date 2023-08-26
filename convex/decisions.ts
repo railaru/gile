@@ -15,6 +15,25 @@ export const get = query({
     },
 });
 
+export const getById = query({
+    args: {
+        _id: v.string(),
+    },
+    handler: async (ctx, args) => {
+        if ( !args._id) {
+            return null;
+        }
+
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity === null) {
+            return null;
+        }
+
+        return await ctx.db.query('decisions').filter((q) => q.eq(q.field('_id'), args._id)).collect();
+    }
+});
+
 export const add = mutation({
     args: {
         decision: v.string(),

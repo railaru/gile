@@ -53,8 +53,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep1 && (
                         <PageLink
-                            href={PAGE_ROUTES.DECISIONS.CREATE}
-                            isActive={pathName === PAGE_ROUTES.DECISIONS.CREATE}
+                            href={PAGE_ROUTES.DECISIONS.MAKE()}
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.MAKE()}
                         >
                             What decision do you have to make?
                         </PageLink>

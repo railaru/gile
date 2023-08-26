@@ -15,6 +15,7 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/DropdownMenu/DropdownMenu';
 import { CandlestickChart, FileEdit, List as ListIcon, MoreHorizontal, Scale, Trash } from 'lucide-react';
+import { PAGE_ROUTES } from '@/constants/routes';
 
 export default function List() {
     const { data, isReady, isEmpty, isLoading } = useDecisions();
@@ -39,12 +40,15 @@ export default function List() {
 
                             <DropdownMenuContent className="min-w-[200px]">
                                 <DropdownMenuItem>
-                                    <FileEdit className="w-4 h-4 mr-2"/>
+                                    <Link href={PAGE_ROUTES.DECISIONS.MAKE(item._id)} className="flex">
+                                        <FileEdit className="w-4 h-4 mr-2"/>
 
-                                    <span>
-                                        Edit decision
-                                    </span>
+                                        <span>
+                                            Edit decision
+                                        </span>
+                                    </Link>
                                 </DropdownMenuItem>
+
 
                                 <DropdownMenuItem>
                                     <ListIcon className="w-4 h-4 mr-2"/>
