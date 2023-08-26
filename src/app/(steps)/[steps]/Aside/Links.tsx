@@ -34,7 +34,8 @@ const tradeoffsLinks = [
     },
 ];
 
-type Props = HTMLAttributes<HTMLElement>;
+type Props = HTMLAttributes<HTMLElement>
+
 export default function Links(props: Props) {
     const pathName = usePathname();
     const { decision } = useDecisionStore();
