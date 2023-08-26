@@ -2,6 +2,9 @@ import Pane from '@/components/ui/Pane/Pane';
 import Overview from './Overview/Overview';
 import React from 'react';
 
+export const metadata = {
+    title: 'Tradeoffs | Gilė',
+};
 export default function Page() {
     return (
         <div>

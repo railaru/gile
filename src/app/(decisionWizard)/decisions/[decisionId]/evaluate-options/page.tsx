@@ -2,6 +2,9 @@ import Pane from '@/components/ui/Pane/Pane';
 import React from 'react';
 import EvaluateOptions from './EvaluateOptions/EvaluateOptions';
 
+export const metadata = {
+    title: 'Evaluate Options | Gilė',
+};
 export default function Page() {
     return (
         <div>

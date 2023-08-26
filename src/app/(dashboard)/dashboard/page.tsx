@@ -1,11 +1,13 @@
-'use client';
-
 import DashboardHeader from '@/app/Components/DashboardHeader/DashboardHeader';
 import React from 'react';
 import Button from '@/components/ui/Button/Button';
 import Link from 'next/link';
 import List from '@/app/(dashboard)/dashboard/List/List';
 import { PAGE_ROUTES } from '@/constants/routes';
+
+export const metadata = {
+    title: 'Dashboard | Gilė',
+};
 
 export default function Page() {
 

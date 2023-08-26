@@ -2,6 +2,9 @@ import React from 'react';
 import Pane from '@/components/ui/Pane/Pane';
 import Options from './AddOptions/AddOptions';
 
+export const metadata = {
+    title: 'Define Options | Gilė',
+};
 export default function Page() {
     return (
         <div>

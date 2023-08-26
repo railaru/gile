@@ -8,6 +8,11 @@ import BlogSection from '@/app/Components/BlogSection/BlogSection';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
 
+export const metadata = {
+    title: 'Home | Gilė',
+    description: 'Gilė is a decision making tool that helps you make better decisions.',
+};
+
 export default function Page() {
     return (
         <div className="px-4 max-w-[1142px] mx-auto">

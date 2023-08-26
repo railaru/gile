@@ -4,6 +4,10 @@ import Examples from './Examples/Examples';
 import DecisionForm from './DecisionForm/DecisionForm';
 import Divider from '@/components/ui/Divider/Divider';
 
+export const metadata = {
+    title: 'Decision | Gilė',
+};
+
 export default function Page() {
     return (
         <div>
