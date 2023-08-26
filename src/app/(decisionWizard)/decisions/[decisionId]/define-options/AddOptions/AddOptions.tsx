@@ -3,14 +3,14 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/ui/Button/Button';
-import useOptionsStore from '@/app/(steps)/[steps]/store/options';
+import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { Option } from '@/types/options';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputGroup } from '@/components/ui/Input/Input';
 import Divider from '@/components/ui/Divider/Divider';
-import BottomNav from '@/app/(steps)/[steps]/BottomNav/BottomNav';
+import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
 
@@ -89,7 +89,7 @@ export default function AddOptions() {
             <form onSubmit={form.handleSubmit(handleSubmit)} className="flex mt-8">
                 <InputGroup
                     inputProps={{
-                        placeholder: 'Enter a new option',
+                        placeholder: 'Enter a create option',
                         className: 'h-[45px] rounded-r-none',
                         onChange: (e) => form.setValue('title', e.target.value),
                         value: form.watch('title'),
@@ -107,12 +107,13 @@ export default function AddOptions() {
 
             <BottomNav>
                 <Button variant="ghost" type="button" asChild>
-                    <Link href={PAGE_ROUTES.STEPS[1]}>Go back</Link>
+                    <Link href={PAGE_ROUTES.DECISIONS.CREATE}>Go back</Link>
                 </Button>
 
                 {options.length > 1 && (
                     <Button type="button" asChild className="ml-4">
-                        <Link href={PAGE_ROUTES.STEPS[3]}>Continue</Link>
+                        {/*// todo: replace with decision id from db*/}
+                        <Link href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')}>Continue</Link>
                     </Button>
                 )}
             </BottomNav>

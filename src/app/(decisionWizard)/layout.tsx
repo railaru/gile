@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import DashboardHeader from '@/app/Components/DashboardHeader/DashboardHeader';
-import Aside from '@/app/(steps)/[steps]/Aside/Aside';
+import Aside from '@/app/(decisionWizard)/Aside/Aside';
 
 export default function Layout({ children }: { children: ReactNode }) {
     return (

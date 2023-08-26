@@ -1,9 +1,9 @@
 import React from 'react';
 import { SheetContent, SheetHeader, SheetTitle, } from '@/components/ui/Sheet/Sheet';
 import Button from '@/components/ui/Button/Button';
-import useDecisionStore from '@/app/(steps)/[steps]/store/decision';
-import { mockData } from '@/app/(steps)/[steps]/1/Examples/mockData';
-import useStore from '@/app/(steps)/[steps]/1/Examples/store';
+import useDecisionStore from '@/app/(decisionWizard)/store/decision';
+import { mockData } from '@/app/(decisionWizard)/decisions/create/Examples/mockData';
+import useStore from '@/app/(decisionWizard)/decisions/create/Examples/store';
 
 export default function Content() {
     const { setDecision } = useDecisionStore();

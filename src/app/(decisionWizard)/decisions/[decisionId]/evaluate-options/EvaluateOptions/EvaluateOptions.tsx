@@ -4,14 +4,14 @@ import React from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/Table/Table';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from '@/components/ui/Tooltip/Tooltip';
-import useOptionsStore from '@/app/(steps)/[steps]/store/options';
+import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { Input } from '@/components/ui/Input/Input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { tableHeadData } from './staticData';
 import { z } from 'zod';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import BottomNav from '@/app/(steps)/[steps]/BottomNav/BottomNav';
+import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Button from '@/components/ui/Button/Button';
 import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
@@ -69,7 +69,7 @@ export default function EvaluateOptions() {
     const onSubmit = (data: FormData) => {
         setOptions(data.options);
         setOptionsAreValidated(true);
-        router.push(PAGE_ROUTES.STEPS.TRADEOFFS.INDEX);
+        router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')); // todo: replace with decision id from db
     };
 
     return (
@@ -231,7 +231,11 @@ export default function EvaluateOptions() {
 
             <BottomNav>
                 <Button variant="ghost" type="button" asChild>
-                    <Link href={PAGE_ROUTES.STEPS[2]}>Go back</Link>
+                    <Link
+                        href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
+                    >
+                        Go back
+                    </Link>
                 </Button>
 
                 <Button type="submit" className="ml-4">Continue</Button>

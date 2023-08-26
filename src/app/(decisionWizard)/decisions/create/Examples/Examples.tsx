@@ -2,7 +2,7 @@
 
 import React, { lazy, Suspense } from 'react';
 import { Sheet } from '@/components/ui/Sheet/Sheet';
-import useStore from '@/app/(steps)/[steps]/1/Examples/store';
+import useStore from '@/app/(decisionWizard)/decisions/create/Examples/store';
 
 const Content = lazy(() => import('./Content'));
 

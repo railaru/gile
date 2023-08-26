@@ -12,7 +12,7 @@ const mockData = [
         description: 'Slow and steady wins the race. Find tradeoffs that that optimise for long term wins.',
         link: {
             title: 'Discover',
-            url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN,
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.RISK_WEIGHTED_RETURN('123'), // todo: replace with real decision id
         }
     },
     {
@@ -21,7 +21,7 @@ const mockData = [
         description: 'Find opportunities optimised for the biggest reward while ignoring the risk.',
         link: {
             title: 'Discover',
-            url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.HIGH_REWARD_HIGH_RISK,
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.HIGH_REWARD_HIGH_RISK('123'), // todo: replace with real decision id
         }
     },
     {
@@ -30,7 +30,7 @@ const mockData = [
         description: 'Find opportunities with low effort and quick wins.',
         link: {
             title: 'Discover',
-            url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.LOW_HANGING_FRUIT,
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.LOW_HANGING_FRUIT('123'), // todo: replace with real decision id
         }
     }
 ];

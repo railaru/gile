@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
-import RouteChangeAnimation from '@/app/(steps)/[steps]/RouteChangeAnimation/RouteChangeAnimation';
+import RouteChangeAnimation from '@/app/RouteChangeAnimation/RouteChangeAnimation';
 import { ClerkProvider } from '@clerk/nextjs';
 import ConvexClientProvider from '@/app/Providers/ConvexClientProvider';
 

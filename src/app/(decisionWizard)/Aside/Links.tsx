@@ -6,30 +6,30 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Divider from '@/components/ui/Divider/Divider';
-import useDecisionStore from '@/app/(steps)/[steps]/store/decision';
-import useOptionsStore from '@/app/(steps)/[steps]/store/options';
+import useDecisionStore from '@/app/(decisionWizard)/store/decision';
+import useOptionsStore from '@/app/(decisionWizard)/store/options';
 
 const links = [
     {
         name: 'Evaluate your options',
-        url: PAGE_ROUTES.STEPS[3],
+        url: PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123'), // todo: replace with decision id from db
     },
 ];
 
 const tradeoffsLinks = [
     {
         name: 'Risk weighted return',
-        url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.RISK_WEIGHTED_RETURN,
+        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.RISK_WEIGHTED_RETURN('123'), // todo: replace with decision id from db
         emoji: '🐢',
     },
     {
         name: 'High reward & High risk',
-        url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.HIGH_REWARD_HIGH_RISK,
+        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.HIGH_REWARD_HIGH_RISK('123'), // todo: replace with decision id from db
         emoji: '🎸',
     },
     {
         name: 'Low hanging fruit',
-        url: PAGE_ROUTES.STEPS.TRADEOFFS.HASH_SECTIONS.LOW_HANGING_FRUIT,
+        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.LOW_HANGING_FRUIT('123'), // todo: replace with decision id from db
         emoji: '🍍',
     },
 ];
@@ -53,8 +53,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep1 && (
                         <PageLink
-                            href={PAGE_ROUTES.STEPS[1]}
-                            isActive={pathName === PAGE_ROUTES.STEPS[1]}
+                            href={PAGE_ROUTES.DECISIONS.CREATE}
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.CREATE}
                         >
                             What decision do you have to make?
                         </PageLink>
@@ -63,8 +63,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep2 && (
                         <PageLink
-                            href={PAGE_ROUTES.STEPS[2]}
-                            isActive={pathName === PAGE_ROUTES.STEPS[2]}
+                            href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
                         >
                             What options do you have?
                         </PageLink>
@@ -73,8 +73,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep3 && (
                         <PageLink
-                            href={PAGE_ROUTES.STEPS[3]}
-                            isActive={pathName === PAGE_ROUTES.STEPS[3]}
+                            href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')} // todo: replace with decision id from db
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')} // todo: replace with decision id from db
                         >
                             Evaluate your options
                         </PageLink>
@@ -87,8 +87,8 @@ export default function Links(props: Props) {
 
                             <div className="space-y-4 flex-col flex">
                                 <PageLink
-                                    href={PAGE_ROUTES.STEPS.TRADEOFFS.INDEX}
-                                    isActive={pathName === PAGE_ROUTES.STEPS.TRADEOFFS.INDEX}
+                                    href={PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')} // todo: replace with decision id from db
+                                    isActive={pathName === PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')} // todo: replace with decision id from db
                                 >
                                     Tradeoffs
                                 </PageLink>

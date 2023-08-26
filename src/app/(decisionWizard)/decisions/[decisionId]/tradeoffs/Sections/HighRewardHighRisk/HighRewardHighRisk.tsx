@@ -2,7 +2,7 @@
 
 import Pane from '@/components/ui/Pane/Pane';
 import React from 'react';
-import useOptionsStore from '../../../store/options';
+import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { sortOptionsByHighestReturn } from '@/lib/tradeoffs';
 import { LineChart } from '@tremor/react';
 import { Progress } from '@/components/ui/Progress/Progress';

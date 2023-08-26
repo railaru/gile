@@ -3,17 +3,15 @@ export const PAGE_ROUTES = {
     SIGN_UP: '/sign-up',
     SIGN_IN: '/sign-in',
     DASHBOARD: '/dashboard',
-    STEPS: {
-        '1': '/steps/1',
-        '2': '/steps/2',
-        '3': '/steps/3',
+    DECISIONS: {
+        CREATE: '/decisions/create',
+        DEFINE_OPTIONS: (id: string) => `/decisions/${id}/define-options`,
+        EVALUATE_OPTIONS: (id: string) => `/decisions/${id}/evaluate-options`,
         TRADEOFFS: {
-            INDEX: '/steps/tradeoffs',
-            HASH_SECTIONS: {
-                RISK_WEIGHTED_RETURN: '/steps/tradeoffs#risk-weighted-return',
-                HIGH_REWARD_HIGH_RISK: '/steps/tradeoffs#high-reward-high-risk',
-                LOW_HANGING_FRUIT: '/steps/tradeoffs#low-hanging-fruit',
-            },
-        },
+            INDEX: (id: string) => `/decisions/${id}/tradeoffs`,
+            RISK_WEIGHTED_RETURN: (id: string) => `/decisions/${id}/tradeoffs#risk-weighted-return`,
+            HIGH_REWARD_HIGH_RISK: (id: string) => `/decisions/${id}/tradeoffs#high-reward-high-risk`,
+            LOW_HANGING_FRUIT: (id: string) => `/decisions/${id}/tradeoffs#low-hanging-fruit`,
+        }
     },
 };

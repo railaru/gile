@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Sheet, SheetContent, } from '@/components/ui/Sheet/Sheet';
-import Links from '@/app/(steps)/[steps]/Aside/Links';
+import Links from '@/app/(decisionWizard)/Aside/Links';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { usePathname } from 'next/navigation';
 

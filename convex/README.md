@@ -11,25 +11,25 @@ import { query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const myQueryFunction = query({
-  // Validators for arguments.
-  args: {
-    first: v.number(),
-    second: v.string(),
-  },
+    // Validators for arguments.
+    args: {
+        first: v.number(),
+        second: v.string(),
+    },
 
-  // Function implementation.
-  hander: async (ctx, args) => {
-    // Read the database as many times as you need here.
-    // See https://docs.convex.dev/database/reading-data.
-    const documents = await ctx.db.query("tablename").collect();
+    // Function implementation.
+    hander: async (ctx, args) => {
+        // Read the database as many times as you need here.
+        // See https://docs.convex.dev/database/reading-data.
+        const documents = await ctx.db.query("tablename").collect();
 
-    // Arguments passed from the client are properties of the args object.
-    console.log(args.first, args.second);
+        // Arguments passed from the client are properties of the args object.
+        console.log(args.first, args.second);
 
-    // Write arbitrary JavaScript here: filter, aggregate, build derived data,
-    // remove non-public properties, or create new objects.
-    return documents;
-  },
+        // Write arbitrary JavaScript here: filter, aggregate, build derived data,
+        // remove non-public properties, or create create objects.
+        return documents;
+    },
 });
 ```
 
@@ -50,23 +50,23 @@ import { mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 export const myMutationFunction = mutation({
-  // Validators for arguments.
-  args: {
-    first: v.string(),
-    second: v.string(),
-  },
+    // Validators for arguments.
+    args: {
+        first: v.string(),
+        second: v.string(),
+    },
 
-  // Function implementation.
-  hander: async (ctx, args) => {
-    // Insert or modify documents in the database here.
-    // Mutations can also read from the database like queries.
-    // See https://docs.convex.dev/database/writing-data.
-    const message = { body: args.first, author: args.second };
-    const id = await ctx.db.insert("messages", message);
+    // Function implementation.
+    hander: async (ctx, args) => {
+        // Insert or modify documents in the database here.
+        // Mutations can also read from the database like queries.
+        // See https://docs.convex.dev/database/writing-data.
+        const message = { body: args.first, author: args.second };
+        const id = await ctx.db.insert("messages", message);
 
-    // Optionally, return a value from your mutation.
-    return await ctx.db.get(id);
-  },
+        // Optionally, return a value from your mutation.
+        return await ctx.db.get(id);
+    },
 });
 ```
 
