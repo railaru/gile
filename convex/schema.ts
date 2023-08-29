@@ -1,8 +1,21 @@
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
+
 export default defineSchema({
     decisions: defineTable({ decision: v.string(), userTokenIdentifier: v.string(), }),
+    options: defineTable({
+        decisionId: v.id('decisions'),
+        title: v.string(),
+        ratings: v.object({
+            financialCost: v.number(),
+            levelOfEffort: v.number(),
+            timeInvestment: v.number(),
+            risk: v.number(),
+            shortTermReturn: v.number(),
+            longTermReturn: v.number(),
+        }),
+    }).index('by_decision_id', ['decisionId']),
     users: defineTable({
         name: v.string(),
         tokenIdentifier: v.string(),

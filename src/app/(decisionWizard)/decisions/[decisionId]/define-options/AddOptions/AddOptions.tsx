@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/ui/Button/Button';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
-import { Option } from '@/types/options';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +10,10 @@ import Divider from '@/components/ui/Divider/Divider';
 import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
+import { useMutation, useQuery } from 'convex/react';
+import { api } from '../../../../../../../convex/_generated/api';
+import { useParams } from 'next/navigation';
+import { Id } from '../../../../../../../convex/_generated/dataModel';
 
 const schema = z.object({
     title: z
@@ -26,7 +27,12 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function AddOptions() {
-    const { options, setOptions, removeOption } = useOptionsStore();
+    const params = useParams();
+    const decisionId = params?.decisionId as Id<'decisions'>;
+
+    const options = useQuery(api.options.getByDecisionId, { decisionId });
+    const addOption = useMutation(api.options.add);
+    const removeOption = useMutation(api.options.deleteById);
 
     const form = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -36,10 +42,8 @@ export default function AddOptions() {
     });
 
     const handleSubmit = () => {
-        const newOptions = [
-            ...options,
-            {
-                id: uuidv4(),
+        addOption({
+                decisionId: decisionId,
                 title: form.getValues('title'),
                 ratings: {
                     financialCost: 0,
@@ -48,27 +52,22 @@ export default function AddOptions() {
                     risk: 0,
                     shortTermReturn: 0,
                     longTermReturn: 0,
-                },
-            },
-        ];
-
-        setOptions(newOptions);
-
-        form.reset();
+                }
+            }
+        ).then(() => {
+            form.reset();
+        });
     };
 
-    const handleDelete = (option: Option) => {
-        removeOption(option);
-    };
 
     return (
         <div>
             <Divider/>
 
             <ul className="mt-8 space-y-6">
-                {options.map((option) => (
+                {options?.map((option) => (
                     <li
-                        key={option.id}
+                        key={option._id}
                         className="bg-white rounded-[4px] px-4 py-[21.5px] flex justify-between items-center"
                     >
                         <span className="pr-3">{option.title}</span>
@@ -76,7 +75,9 @@ export default function AddOptions() {
                         <button
                             type="button"
                             className="text-red-500"
-                            onClick={() => handleDelete(option)}
+                            onClick={async () => {
+                                await removeOption({ _id: option._id });
+                            }}
                         >
                             Remove
                         </button>
@@ -84,7 +85,7 @@ export default function AddOptions() {
                 ))}
             </ul>
 
-            {options.length > 0 && <Divider className="mt-8"/>}
+            {options && options?.length > 0 && <Divider className="mt-8"/>}
 
             <form onSubmit={form.handleSubmit(handleSubmit)} className="flex mt-8">
                 <InputGroup
@@ -110,7 +111,7 @@ export default function AddOptions() {
                     <Link href={PAGE_ROUTES.DECISIONS.MAKE()}>Go back</Link>
                 </Button>
 
-                {options.length > 1 && (
+                {options && options?.length > 1 && (
                     <Button type="button" asChild className="ml-4">
                         {/*// todo: replace with decision id from db*/}
                         <Link href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')}>Continue</Link>

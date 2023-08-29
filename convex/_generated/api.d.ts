@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as decisions from "../decisions";
+import type * as options from "../options";
 import type * as users from "../users";
 
 /**
@@ -27,6 +28,7 @@ import type * as users from "../users";
  */
 declare const fullApi: ApiFromModules<{
   decisions: typeof decisions;
+  options: typeof options;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
