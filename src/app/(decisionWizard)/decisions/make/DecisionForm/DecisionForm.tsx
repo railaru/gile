@@ -9,9 +9,9 @@ import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Button from '@/components/ui/Button/Button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PAGE_ROUTES } from '@/constants/routes';
-import useDecisionStore from '@/app/(decisionWizard)/store/decision';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../../../../convex/_generated/api';
+import { Id } from '../../../../../../convex/_generated/dataModel';
 
 const maxCharacterCount = 70;
 
@@ -28,23 +28,30 @@ export default function DecisionForm() {
     const router = useRouter();
     const params = useSearchParams();
     const decisionId = params.get('id');
-    const storedDecision = useQuery(api.decisions.getById, { _id: decisionId || '' });
-
-    console.log({ storedDecision });
-
-    const { decision } = useDecisionStore();
-
+    const storedDecisionRecord = useQuery(api.decisions.getById, { _id: decisionId || '' });
+    const decision = storedDecisionRecord?.decision || '';
     const addDecision = useMutation(api.decisions.add);
+    const editDecision = useMutation(api.decisions.edit);
 
     const form = useForm<FormData>({
         resolver: zodResolver(schema),
         defaultValues: {
-            decision,
+            decision
         },
         mode: 'onChange',
     });
 
     const handleSubmit = (form: FormData) => {
+        const shouldUpdate = decisionId && decisionId !== '';
+
+        if (shouldUpdate) {
+            editDecision({ _id: decisionId as Id<'decisions'>, decision: form.decision }).then(() => {
+                router.push(PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId));
+            });
+
+            return;
+        }
+
         addDecision({ decision: form.decision }).then((decisionId) => {
             router.push(PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId));
         });

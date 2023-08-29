@@ -30,7 +30,9 @@ export const getById = query({
             return null;
         }
 
-        return await ctx.db.query('decisions').filter((q) => q.eq(q.field('_id'), args._id)).collect();
+        const items = await ctx.db.query('decisions').filter((q) => q.eq(q.field('_id'), args._id)).collect();
+
+        return items.length > 0 ? items[0] : null;
     }
 });
 
@@ -48,6 +50,24 @@ export const add = mutation({
         return await ctx.db.insert('decisions', {
             decision: args.decision,
             userTokenIdentifier: identity.tokenIdentifier,
+        });
+    }
+});
+
+export const edit = mutation({
+    args: {
+        _id: v.id('decisions'),
+        decision: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity === null) {
+            throw new Error('Called editDecision without authentication present');
+        }
+
+        return await ctx.db.patch(args._id, {
+            decision: args.decision,
         });
     }
 });
