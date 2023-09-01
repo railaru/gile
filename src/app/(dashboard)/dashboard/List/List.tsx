@@ -58,9 +58,11 @@ export default function List() {
                                 </DropdownMenuItem>
 
                                 <DropdownMenuItem>
-                                    <Scale className="w-4 h-4 mr-2"/>
+                                    <Link href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS(item._id)} className="flex">
+                                        <Scale className="w-4 h-4 mr-2"/>
 
-                                    <span>Re-evaluate options</span>
+                                        <span>Re-evaluate options</span>
+                                    </Link>
                                 </DropdownMenuItem>
 
                                 <DropdownMenuItem>

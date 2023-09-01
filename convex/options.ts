@@ -68,3 +68,38 @@ export const deleteById = mutation({
         return await ctx.db.delete(args._id);
     }
 });
+
+export const updateMultiple = mutation({
+    args: {
+        options: v.array(v.object({
+            _id: v.id('options'),
+            decisionId: v.id('decisions'),
+            userTokenIdentifier: v.string(),
+            title: v.string(),
+            ratings: v.object({
+                financialCost: v.number(),
+                levelOfEffort: v.number(),
+                timeInvestment: v.number(),
+                risk: v.number(),
+                shortTermReturn: v.number(),
+                longTermReturn: v.number(),
+            })
+        }))
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity === null) {
+            throw new Error('Called updateMultipleOptions without authentication present');
+        }
+
+        args.options.forEach((option) => {
+            ctx.db.patch(option._id, {
+                decisionId: option.decisionId,
+                userTokenIdentifier: identity.tokenIdentifier,
+                title: option.title,
+                ratings: option.ratings,
+            });
+        });
+    }
+});

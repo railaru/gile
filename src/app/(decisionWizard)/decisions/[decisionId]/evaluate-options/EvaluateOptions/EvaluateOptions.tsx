@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/Table/Table';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from '@/components/ui/Tooltip/Tooltip';
@@ -15,7 +15,10 @@ import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Button from '@/components/ui/Button/Button';
 import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { Id } from '../../../../../../../convex/_generated/dataModel';
+import { useQuery } from 'convex/react';
+import { api } from '../../../../../../../convex/_generated/api';
 
 const minRating = 1;
 const maxRating = 5;
@@ -28,7 +31,7 @@ const ratingSchema = z
 export const schema = z.object({
     options: z.array(
         z.object({
-            id: z.string(),
+            _id: z.string(),
             title: z.string(),
             ratings: z.object({
                 financialCost: ratingSchema,
@@ -46,17 +49,23 @@ type FormData = z.infer<typeof schema>;
 
 export default function EvaluateOptions() {
     const router = useRouter();
-    const { options, setOptions, setOptionsAreValidated } = useOptionsStore();
+    const params = useParams();
+    const decisionId = params?.decisionId as Id<'decisions'>;
+
+    const options = useQuery(api.options.getByDecisionId, { decisionId });
+    const { setOptions, setOptionsAreValidated } = useOptionsStore();
+
 
     const {
         control,
         handleSubmit,
         register,
+        setValue,
         formState: { errors },
     } = useForm<FormData>({
         resolver: zodResolver(schema),
         defaultValues: {
-            options,
+            options: [],
         },
         mode: 'onTouched',
     });
@@ -67,10 +76,14 @@ export default function EvaluateOptions() {
     });
 
     const onSubmit = (data: FormData) => {
-        setOptions(data.options);
+        // setOptions(data.options);
         setOptionsAreValidated(true);
-        router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')); // todo: replace with decision id from db
+        router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId));
     };
+
+    useEffect(() => {
+        setValue('options', options || []);
+    }, [options]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 lg:mt-16 xl:mx-[-100px]">
@@ -232,7 +245,7 @@ export default function EvaluateOptions() {
             <BottomNav>
                 <Button variant="ghost" type="button" asChild>
                     <Link
-                        href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
+                        href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId)} // todo: replace with decision id from db
                     >
                         Go back
                     </Link>
