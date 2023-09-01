@@ -16,8 +16,11 @@ export const getByDecisionId = query({
             return null;
         }
 
-        return await ctx.db.query('options')
-        .filter((q) => q.eq(q.field('decisionId'), args.decisionId))
+        return await ctx.db
+        .query('options')
+        .withIndex('by_decision_id_and_user_token', (q) =>
+            q.eq('decisionId', args.decisionId).eq('userTokenIdentifier', identity.tokenIdentifier)
+        )
         .collect();
     },
 });
@@ -42,7 +45,12 @@ export const add = mutation({
             throw new Error('Called addOption without authentication present');
         }
 
-        return await ctx.db.insert('options', args);
+        return await ctx.db.insert('options', {
+            decisionId: args.decisionId,
+            userTokenIdentifier: identity.tokenIdentifier,
+            title: args.title,
+            ratings: args.ratings,
+        });
     }
 });
 

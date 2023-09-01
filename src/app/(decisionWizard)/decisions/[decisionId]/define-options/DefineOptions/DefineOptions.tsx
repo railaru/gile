@@ -26,7 +26,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function AddOptions() {
+export default function DefineOptions() {
     const params = useParams();
     const decisionId = params?.decisionId as Id<'decisions'>;
 
@@ -65,7 +65,7 @@ export default function AddOptions() {
             <Divider/>
 
             <ul className="mt-8 space-y-6">
-                {options?.map((option) => (
+                {options && options?.map((option) => (
                     <li
                         key={option._id}
                         className="bg-white rounded-[4px] px-4 py-[21.5px] flex justify-between items-center"
@@ -113,8 +113,7 @@ export default function AddOptions() {
 
                 {options && options?.length > 1 && (
                     <Button type="button" asChild className="ml-4">
-                        {/*// todo: replace with decision id from db*/}
-                        <Link href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')}>Continue</Link>
+                        <Link href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS(decisionId)}>Continue</Link>
                     </Button>
                 )}
             </BottomNav>

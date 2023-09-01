@@ -49,11 +49,12 @@ export default function List() {
                                     </Link>
                                 </DropdownMenuItem>
 
-
                                 <DropdownMenuItem>
-                                    <ListIcon className="w-4 h-4 mr-2"/>
+                                    <Link href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(item._id)} className="flex">
+                                        <ListIcon className="w-4 h-4 mr-2"/>
 
-                                    <span>Update options</span>
+                                        <span>Update options</span>
+                                    </Link>
                                 </DropdownMenuItem>
 
                                 <DropdownMenuItem>
@@ -87,8 +88,12 @@ export default function List() {
                             {item.decision}
                         </h3>
 
-                        <Link href={PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(item._id)}
-                              className="text-primary inline-block mt-4">Check results</Link>
+                        <Link
+                            href={PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(item._id)}
+                            className="text-primary inline-block mt-4"
+                        >
+                            Check results
+                        </Link>
                     </li>
                 ))}
             </ul>

@@ -30,9 +30,7 @@ export const getById = query({
             return null;
         }
 
-        const items = await ctx.db.query('decisions').filter((q) => q.eq(q.field('_id'), args._id)).collect();
-
-        return items.length > 0 ? items[0] : null;
+        return await ctx.db.query('decisions').filter((q) => q.eq(q.field('_id'), args._id)).first();
     }
 });
 

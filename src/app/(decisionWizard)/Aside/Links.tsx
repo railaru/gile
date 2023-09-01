@@ -3,49 +3,67 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Divider from '@/components/ui/Divider/Divider';
-import useDecisionStore from '@/app/(decisionWizard)/store/decision';
 import useOptionsStore from '@/app/(decisionWizard)/store/options';
+import { useQuery } from 'convex/react';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
 
-const links = [
-    {
-        name: 'Evaluate your options',
-        url: PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123'), // todo: replace with decision id from db
-    },
-];
-
-const tradeoffsLinks = [
-    {
-        name: 'Risk weighted return',
-        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.RISK_WEIGHTED_RETURN('123'), // todo: replace with decision id from db
-        emoji: '🐢',
-    },
-    {
-        name: 'High reward & High risk',
-        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.HIGH_REWARD_HIGH_RISK('123'), // todo: replace with decision id from db
-        emoji: '🎸',
-    },
-    {
-        name: 'Low hanging fruit',
-        url: PAGE_ROUTES.DECISIONS.TRADEOFFS.LOW_HANGING_FRUIT('123'), // todo: replace with decision id from db
-        emoji: '🍍',
-    },
-];
 
 type Props = HTMLAttributes<HTMLElement>
 
 export default function Links(props: Props) {
     const pathName = usePathname();
-    const { decision } = useDecisionStore();
-    const { options, optionsAreValidated } = useOptionsStore();
+    const searchParams = useSearchParams();
+    const params = useParams();
+    const decisionIdFromSearchParams = searchParams.get('id') as Id<'decisions'>;
+    const decisionIdFromParams = params?.decisionId as Id<'decisions'>;
+    const decisionId = decisionIdFromSearchParams || decisionIdFromParams;
 
-    // todo: have to be moved to the serverside.
+    const storedDecisionRecord = useQuery(api.decisions.getById, { _id: decisionId || '' });
+    const decision = storedDecisionRecord?.decision || '';
+
+    const options = useQuery(api.options.getByDecisionId, { decisionId });
+    const { optionsAreValidated } = useOptionsStore();
+
     const canAccessStep1 = true;
     const canAccessStep2 = decision.length > 0 && canAccessStep1;
-    const canAccessStep3 = options.length > 0 && canAccessStep2;
+
+    const canAccessStep3 = options && options?.length > 0 && canAccessStep2;
     const canAccessTradeOffs = optionsAreValidated && canAccessStep2 && canAccessStep3;
+
+    if ( !decisionId) {
+        return null;
+    }
+
+    const links = [
+        {
+            name: 'Evaluate your options',
+            url: PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS(decisionId),
+        },
+    ];
+
+    const tradeoffsLinks = [
+        {
+            name: 'Risk weighted return',
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.RISK_WEIGHTED_RETURN(decisionId),
+            emoji: '🐢',
+        },
+        {
+            name: 'High reward & High risk',
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.HIGH_REWARD_HIGH_RISK(decisionId),
+            emoji: '🎸',
+        },
+        {
+            name: 'Low hanging fruit',
+            url: PAGE_ROUTES.DECISIONS.TRADEOFFS.LOW_HANGING_FRUIT(decisionId),
+            emoji: '🍍',
+        },
+    ];
+
+    const decisionLink = decisionId ? PAGE_ROUTES.DECISIONS.MAKE(decisionId) : PAGE_ROUTES.DECISIONS.MAKE();
 
     return (
         <div {...props}>
@@ -53,8 +71,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep1 && (
                         <PageLink
-                            href={PAGE_ROUTES.DECISIONS.MAKE()}
-                            isActive={pathName === PAGE_ROUTES.DECISIONS.MAKE()}
+                            href={decisionLink}
+                            isActive={pathName.includes('make')}
                         >
                             What decision do you have to make?
                         </PageLink>
@@ -63,8 +81,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep2 && (
                         <PageLink
-                            href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
-                            isActive={pathName === PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS('123')} // todo: replace with decision id from db
+                            href={PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId)}
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.DEFINE_OPTIONS(decisionId)}
                         >
                             What options do you have?
                         </PageLink>
@@ -73,8 +91,8 @@ export default function Links(props: Props) {
                 {
                     canAccessStep3 && (
                         <PageLink
-                            href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')} // todo: replace with decision id from db
-                            isActive={pathName === PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS('123')} // todo: replace with decision id from db
+                            href={PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS(decisionId)}
+                            isActive={pathName === PAGE_ROUTES.DECISIONS.EVALUATE_OPTIONS(decisionId)}
                         >
                             Evaluate your options
                         </PageLink>
@@ -87,8 +105,8 @@ export default function Links(props: Props) {
 
                             <div className="space-y-4 flex-col flex">
                                 <PageLink
-                                    href={PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')} // todo: replace with decision id from db
-                                    isActive={pathName === PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX('123')} // todo: replace with decision id from db
+                                    href={PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId)}
+                                    isActive={pathName === PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId)}
                                 >
                                     Tradeoffs
                                 </PageLink>
