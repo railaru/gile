@@ -5,7 +5,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import PageLink from "@/app/(decisionWizard)/Aside/PageLink";
 import { PAGE_ROUTES } from "@/constants/routes";
-import Links from "@/app/(decisionWizard)/Aside/Links";
+import LinksRequiringDecisionId from "@/app/(decisionWizard)/Aside/LinksRequiringDecisionId";
 
 export default function Aside() {
 	const pathName = usePathname();
@@ -31,7 +31,7 @@ export default function Aside() {
 				}
 				{
 					decisionId && (
-						<Links/>
+						<LinksRequiringDecisionId/>
 					)
 				}
 			</div>
