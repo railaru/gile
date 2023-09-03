@@ -2,11 +2,11 @@
 
 import Pane from '@/components/ui/Pane/Pane';
 import React from 'react';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { sortOptionsByHighestReturn } from '@/lib/tradeoffs';
 import { LineChart } from '@tremor/react';
 import { Progress } from '@/components/ui/Progress/Progress';
 import { Option } from '@/types/options';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 function formatOptionsForChart(options: Option[]) {
     return options.map((option) => ({
@@ -16,8 +16,9 @@ function formatOptionsForChart(options: Option[]) {
 }
 
 export default function HighRewardHighRisk() {
-    const { options } = useOptionsStore();
-    const sortedOptions = sortOptionsByHighestReturn(options);
+    const { data } = useOptions();
+
+    const sortedOptions = sortOptionsByHighestReturn(data || []);
 
     return (
         <Pane id="high-reward-high-risk" className="mt-16">
@@ -45,7 +46,7 @@ export default function HighRewardHighRisk() {
                 </div>
             </div>
 
-            {options.length > 0 && (
+            {data && data.length > 0 && (
                 <ul className="mt-16 space-y-4">
                     {sortedOptions.map((option, index) => (
                         <li

@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/Table/Table';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from '@/components/ui/Tooltip/Tooltip';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { Input } from '@/components/ui/Input/Input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { tableHeadData } from './staticData';
@@ -17,8 +16,9 @@ import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { Id } from '../../../../../../../convex/_generated/dataModel';
-import { useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '../../../../../../../convex/_generated/api';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 const minRating = 1;
 const maxRating = 5;
@@ -51,9 +51,9 @@ export default function EvaluateOptions() {
     const router = useRouter();
     const params = useParams();
     const decisionId = params?.decisionId as Id<'decisions'>;
+    const { data: options } = useOptions();
 
-    const options = useQuery(api.options.getByDecisionId, { decisionId });
-    const { setOptions, setOptionsAreValidated } = useOptionsStore();
+    const updateMultipleOptions = useMutation(api.options.updateMultiple);
 
 
     const {
@@ -76,9 +76,18 @@ export default function EvaluateOptions() {
     });
 
     const onSubmit = (data: FormData) => {
-        // setOptions(data.options);
-        setOptionsAreValidated(true);
-        router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId));
+        const formattedOptions = data.options.map((option) => {
+            return {
+                _id: option._id as Id<'options'>,
+                decisionId: decisionId,
+                title: option.title,
+                ratings: option.ratings
+            };
+        });
+
+        updateMultipleOptions({ options: formattedOptions }).then(() => {
+            router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId));
+        });
     };
 
     useEffect(() => {

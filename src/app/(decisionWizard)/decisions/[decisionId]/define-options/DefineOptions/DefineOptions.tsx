@@ -10,10 +10,11 @@ import Divider from '@/components/ui/Divider/Divider';
 import BottomNav from '@/app/(decisionWizard)/BottomNav/BottomNav';
 import Link from 'next/link';
 import { PAGE_ROUTES } from '@/constants/routes';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '../../../../../../../convex/_generated/api';
 import { useParams } from 'next/navigation';
 import { Id } from '../../../../../../../convex/_generated/dataModel';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 const schema = z.object({
     title: z
@@ -30,7 +31,7 @@ export default function DefineOptions() {
     const params = useParams();
     const decisionId = params?.decisionId as Id<'decisions'>;
 
-    const options = useQuery(api.options.getByDecisionId, { decisionId });
+    const { data: options } = useOptions();
     const addOption = useMutation(api.options.add);
     const removeOption = useMutation(api.options.deleteById);
 
@@ -59,7 +60,7 @@ export default function DefineOptions() {
         });
     };
 
-    
+
     return (
         <div>
             <Divider/>
