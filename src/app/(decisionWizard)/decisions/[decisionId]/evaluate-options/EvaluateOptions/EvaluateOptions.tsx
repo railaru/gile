@@ -17,7 +17,7 @@ import { PAGE_ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { Id } from '../../../../../../../convex/_generated/dataModel';
-import { useQuery } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../../../../../convex/_generated/api';
 
 const minRating = 1;
@@ -53,6 +53,7 @@ export default function EvaluateOptions() {
     const decisionId = params?.decisionId as Id<'decisions'>;
 
     const options = useQuery(api.options.getByDecisionId, { decisionId });
+    const updateMultipleOptions = useMutation(api.options.updateMultiple);
     const { setOptions, setOptionsAreValidated } = useOptionsStore();
 
 
@@ -76,9 +77,19 @@ export default function EvaluateOptions() {
     });
 
     const onSubmit = (data: FormData) => {
-        // setOptions(data.options);
-        setOptionsAreValidated(true);
-        router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId));
+        const formattedOptions = data.options.map((option) => {
+            return {
+                _id: option._id as Id<'options'>,
+                decisionId: decisionId,
+                title: option.title,
+                ratings: option.ratings
+            };
+        });
+
+        updateMultipleOptions({ options: formattedOptions }).then(() => {
+            setOptionsAreValidated(true);
+            router.push(PAGE_ROUTES.DECISIONS.TRADEOFFS.INDEX(decisionId));
+        });
     };
 
     useEffect(() => {

@@ -74,7 +74,6 @@ export const updateMultiple = mutation({
         options: v.array(v.object({
             _id: v.id('options'),
             decisionId: v.id('decisions'),
-            userTokenIdentifier: v.string(),
             title: v.string(),
             ratings: v.object({
                 financialCost: v.number(),
