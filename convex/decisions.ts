@@ -86,6 +86,19 @@ export const deleteById = mutation({
 			throw new Error('Called deleteDecision without authentication present');
 		}
 
-		return await ctx.db.delete(args._id);
+		const optionsWithDecisionId = await ctx.db
+			.query('options')
+			.withIndex('by_decision_id_and_user_token', (q) =>
+				q.eq('decisionId', args._id).eq('userTokenIdentifier', identity.tokenIdentifier)
+			)
+			.collect();
+
+		optionsWithDecisionId.forEach(async (option) => {
+			ctx.db.delete(option._id).catch((err) => {
+				throw new Error('Error deleting option');
+			});
+		});
+
+		await ctx.db.delete(args._id);
 	}
 });

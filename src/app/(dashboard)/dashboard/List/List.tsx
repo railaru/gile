@@ -8,11 +8,11 @@ import EmptyState from '@/app/(dashboard)/dashboard/EmptyState/EmptyState';
 import { cn } from '@/lib/utils';
 import { useDecisions } from '@/hooks/queries/useDecisions';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger
 } from '@/components/ui/DropdownMenu/DropdownMenu';
 import { CandlestickChart, FileEdit, List as ListIcon, MoreHorizontal, Scale, Trash } from 'lucide-react';
 import { PAGE_ROUTES } from '@/constants/routes';
@@ -21,8 +21,8 @@ export default function List() {
 	const {data, isReady, isEmpty, isLoading} = useDecisions();
 	const deleteDecision = useMutation(api.decisions.deleteById);
 
-	const handleDelete = (_id: Id<'decisions'>) => {
-		deleteDecision({_id});
+	const handleDelete = async (_id: Id<'decisions'>) => {
+		await deleteDecision({_id});
 	};
 
 	return <>

@@ -22,17 +22,19 @@ export default function LinksRequiringDecisionId(props: Props) {
 	const storedDecisionRecord = useQuery(api.decisions.getById, {_id: decisionId || ''});
 	const decision = storedDecisionRecord?.decision || '';
 
-	const options = useQuery(api.options.getByDecisionId, {decisionId});
+	const optionsData = useQuery(api.options.getByDecisionId, {decisionId});
 
-	const canAccessStep1 = true;
-	const canAccessStep2 = decision.length > 0 && canAccessStep1;
-
-	const canAccessStep3 = options && options?.length > 0 && canAccessStep2;
-	const canAccessTradeOffs = canAccessStep2 && canAccessStep3;
-
-	if (!decisionId) {
+	if (!decisionId || !optionsData) {
 		return null;
 	}
+
+	console.log('optionsData', optionsData)
+
+	const canAccessStep2 = decision.length > 0;
+
+	const canAccessStep3 = optionsData.options && optionsData.options?.length > 0 && canAccessStep2;
+	const canAccessTradeOffs = canAccessStep2 && canAccessStep3 && optionsData.areOptionsValid;
+
 
 	const tradeoffsLinks = [
 		{
