@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 import RouteChangeAnimation from '@/app/RouteChangeAnimation/RouteChangeAnimation';
 import { ClerkProvider } from '@clerk/nextjs';
@@ -74,6 +75,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
 				<RouteChangeAnimation/>
 
 				{children}
+				<Analytics/>
 				</body>
 				</html>
 			</ConvexClientProvider>
