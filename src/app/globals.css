@@ -74,3 +74,13 @@ body {
 .cl-headerTitle {
     @apply font-medium;
 }
+
+.cl-userButtonPopoverFooter {
+    display: none;
+}
+
+.cl-userButtonPopoverCard {
+    border-radius: 4px;
+    @apply shadow-lg;
+    @apply border-neutral-7;
+}
