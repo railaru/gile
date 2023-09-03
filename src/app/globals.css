@@ -43,3 +43,34 @@ body {
     font-family: var(--font-matter);
     font-weight: 300;
 }
+
+/* clerk */
+.cl-formButtonPrimary {
+    font-size: 14px;
+    text-transform: none;
+    @apply bg-primary;
+    @apply font-medium;
+}
+
+.cl-formButtonPrimary:hover,
+.cl-formButtonPrimary:focus,
+.cl-formButtonPrimary:active {
+    @apply bg-primary;
+}
+
+
+.cl-footerActionLink,
+.cl-footerActionLink:hover,
+.cl-footerActionLink:focus,
+.cl-footerActionLink:active {
+    @apply text-primary;
+    @apply font-medium;
+}
+
+.cl-internal-b3fm6y {
+    display: none;
+}
+
+.cl-headerTitle {
+    @apply font-medium;
+}
