@@ -2,10 +2,10 @@
 
 import Pane from '@/components/ui/Pane/Pane';
 import React from 'react';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { sortOptionsByLowestHangingFruit } from '@/lib/tradeoffs';
 import { Option } from '@/types/options';
 import { Progress } from '@/components/ui/Progress/Progress';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 function formatOptionsForChart(options: Option[]) {
     return options.map((option) => ({
@@ -16,9 +16,9 @@ function formatOptionsForChart(options: Option[]) {
 }
 
 export default function LowHangingFruit() {
-    const { options } = useOptionsStore();
+    const { data } = useOptions();
 
-    const sortedOptions = sortOptionsByLowestHangingFruit(options);
+    const sortedOptions = sortOptionsByLowestHangingFruit(data || []);
 
     return (
         <Pane id="low-hanging-fruit" className="mt-16">
@@ -47,7 +47,7 @@ export default function LowHangingFruit() {
                 </div>
             </div>
 
-            {options.length > 0 && (
+            {data && data?.length > 0 && (
                 <ul className="mt-16 space-y-4">
                     {sortedOptions.map((option, index) => (
                         <li

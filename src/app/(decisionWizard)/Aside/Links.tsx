@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Divider from '@/components/ui/Divider/Divider';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { useQuery } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
@@ -26,13 +25,12 @@ export default function Links(props: Props) {
     const decision = storedDecisionRecord?.decision || '';
 
     const options = useQuery(api.options.getByDecisionId, { decisionId });
-    const { optionsAreValidated } = useOptionsStore();
 
     const canAccessStep1 = true;
     const canAccessStep2 = decision.length > 0 && canAccessStep1;
 
     const canAccessStep3 = options && options?.length > 0 && canAccessStep2;
-    const canAccessTradeOffs = optionsAreValidated && canAccessStep2 && canAccessStep3;
+    const canAccessTradeOffs = canAccessStep2 && canAccessStep3;
 
     if ( !decisionId) {
         return null;

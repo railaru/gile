@@ -2,11 +2,11 @@
 
 import Pane from '@/components/ui/Pane/Pane';
 import React from 'react';
-import useOptionsStore from '@/app/(decisionWizard)/store/options';
 import { sortOptionsByRiskWeightedReturn } from '@/lib/tradeoffs';
 import { Option } from '@/types/options';
 import { Progress } from '@/components/ui/Progress/Progress';
 import { ScatterChart } from '@tremor/react';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 function formatOptionsForChart(options: Option[]) {
     return options.map((option) => ({
@@ -17,9 +17,9 @@ function formatOptionsForChart(options: Option[]) {
 }
 
 export default function RiskWeightedReturn() {
-    const { options } = useOptionsStore();
+    const { data } = useOptions();
 
-    const sortedOptions = sortOptionsByRiskWeightedReturn(options);
+    const sortedOptions = sortOptionsByRiskWeightedReturn(data || []);
 
     return (
         <Pane id="risk-weighted-return" className="mt-12 lg:mt-16">
@@ -47,7 +47,7 @@ export default function RiskWeightedReturn() {
                 </div>
             </div>
 
-            {options.length > 0 && (
+            {data && data.length > 0 && (
                 <ul className="mt-16 space-y-4">
                     {sortedOptions.map((option, index) => (
                         <li
