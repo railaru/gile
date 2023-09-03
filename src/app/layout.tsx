@@ -75,7 +75,10 @@ export default function RootLayout({children}: { children: ReactNode }) {
 				<RouteChangeAnimation/>
 
 				{children}
-				<Analytics/>
+				
+				{
+					process.env.NODE_ENV === 'production' && <Analytics/>
+				}
 				</body>
 				</html>
 			</ConvexClientProvider>
