@@ -29,7 +29,7 @@ export default function List() {
 		{isReady && (
 			<ul className="grid gap-8 md:grid-cols-2">
 				{data?.map((item) => (
-					<li key={item._id} className="bg-neutral-7/50 rounded-[4px] p-4 lg:p-7 relative">
+					<li key={item._id} className="bg-neutral-7/50 rounded-[4px] p-4 lg:p-7 pt-7 lg:pt-10 relative">
 						<DropdownMenu>
 							<DropdownMenuTrigger
 								className="absolute right-3 top-2 rounded-full hover:bg-neutral-6/50 h-7 w-7 inline-flex items-center justify-center transition"

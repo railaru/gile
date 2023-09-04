@@ -28,8 +28,6 @@ export default function LinksRequiringDecisionId(props: Props) {
 		return null;
 	}
 
-	console.log('optionsData', optionsData)
-
 	const canAccessStep2 = decision.length > 0;
 
 	const canAccessStep3 = optionsData.options && optionsData.options?.length > 0 && canAccessStep2;
