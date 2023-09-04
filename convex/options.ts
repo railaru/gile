@@ -1,6 +1,6 @@
 import { mutation, query } from './_generated/server';
 import { v } from 'convex/values';
-import { ratingSchema } from "../src/constants/schemas";
+import { validateOptions } from "../src/lib/validators";
 
 export const getByDecisionId = query({
 	args: {
@@ -24,20 +24,7 @@ export const getByDecisionId = query({
 			)
 			.collect();
 
-		let areOptionsValid = true;
-
-		options.forEach((option) => {
-			Object.values(option.ratings).forEach((rating) => {
-				const parsedRatings = ratingSchema.safeParse(rating);
-
-				if (parsedRatings.success) {
-					return;
-				}
-
-				areOptionsValid = false;
-			});
-		});
-
+		const areOptionsValid = validateOptions(options);
 
 		return {
 			options,
