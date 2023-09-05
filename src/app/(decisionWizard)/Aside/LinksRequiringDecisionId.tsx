@@ -19,7 +19,7 @@ export default function LinksRequiringDecisionId(props: Props) {
 	const decisionIdFromParams = params?.decisionId as Id<'decisions'>;
 	const decisionId = decisionIdFromSearchParams || decisionIdFromParams;
 
-	const storedDecisionRecord = useQuery(api.decisions.getById, {_id: decisionId || ''});
+	const storedDecisionRecord = useQuery(api.decisions.getById, {_id: decisionId});
 	const decision = storedDecisionRecord?.decision || '';
 
 	const optionsData = useQuery(api.options.getByDecisionId, {decisionId});
