@@ -28,8 +28,8 @@ type FormData = z.infer<typeof schema>;
 export default function DecisionForm() {
 	const router = useRouter();
 	const params = useSearchParams();
-	const decisionId = params.get('id') as Id<'decisions'>
-	const storedDecisionRecord = useQuery(api.decisions.getById, {_id: decisionId});
+	const decisionId = params.get('id');
+	const storedDecisionRecord = useQuery(api.decisions.getById, {_id: decisionId || ''});
 	const storedDecision = storedDecisionRecord?.decision || '';
 	const {decision: clientStateDecision} = useDecisionStore();
 	const decision = storedDecision || clientStateDecision || '';

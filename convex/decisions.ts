@@ -17,7 +17,7 @@ export const get = query({
 
 export const getById = query({
 	args: {
-		_id: v.id('decisions'),
+		_id: v.string(),
 	},
 	handler: async (ctx, args) => {
 		if (!args._id) {
@@ -95,7 +95,7 @@ export const deleteById = mutation({
 
 		optionsWithDecisionId.forEach(async (option) => {
 			ctx.db.delete(option._id).catch((err) => {
-				throw new Error(err);
+				throw new Error('Error deleting option');
 			});
 		});
 
