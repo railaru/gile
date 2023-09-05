@@ -6,24 +6,28 @@ import List from '@/app/(dashboard)/dashboard/List/List';
 import { PAGE_ROUTES } from '@/constants/routes';
 
 export const metadata = {
-    title: 'Dashboard | Gilė',
+	title: 'Dashboard | Gilė',
 };
 
 export default function Page() {
 
-    return (
-        <div>
-            <DashboardHeader/>
+	return (
+		<div>
+			<DashboardHeader/>
 
-            <main className="max-w-[800px] mx-auto pt-12 pb-24 px-4 lg:px-0">
-                <div className="flex justify-end pb-8 mb-8 border-b-2 border-neutral-7">
-                    <Button asChild>
-                        <Link href={PAGE_ROUTES.DECISIONS.MAKE()}>Add new</Link>
-                    </Button>
-                </div>
+			<main className="max-w-[800px] mx-auto pt-12 pb-24 px-4 lg:px-0">
+				<div className="flex justify-end pb-8 mb-8 border-b-2 border-neutral-7">
+					<Button asChild variant="ghost" className="text-primary hover:text-primary focus:text-primary mr-2">
+						<Link href={PAGE_ROUTES.DASHBOARD.FEED_AI}>Feed AI</Link>
+					</Button>
 
-                <List/>
-            </main>
-        </div>
-    );
+					<Button asChild>
+						<Link href={PAGE_ROUTES.DECISIONS.MAKE()}>Add new</Link>
+					</Button>
+				</div>
+
+				<List/>
+			</main>
+		</div>
+	);
 }
