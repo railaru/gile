@@ -152,11 +152,13 @@ export default function PersonalInfoForm() {
                                 {
                                     filteredTopicListGroupItems.map((group, index) => {
                                         const isLast = index === topicsListGroups.length - 1;
+                                        const groupHasUnadedItems = group.items.some((topic) => !interests.find((interest) => interest === topic));
+                                        const showTitle = !searchQuery && groupHasUnadedItems;
 
                                         return (
                                             <ul key={index}>
                                                 {
-                                                    !searchQuery && (
+                                                    showTitle && (
                                                         <li className="p-1.5 px-3 m-1.5 font-medium">
                                                             {group.title}
                                                         </li>
@@ -165,6 +167,13 @@ export default function PersonalInfoForm() {
 
                                                 {
                                                     group.items.map((topic, index) => {
+
+                                                        const itemIsAlreadyAdded = Boolean(interests.find((interest) => interest === topic));
+
+                                                        if (itemIsAlreadyAdded) {
+                                                            return null;
+                                                        }
+
                                                         return (
                                                             <li
                                                                 key={index}
