@@ -5,7 +5,11 @@ import { PAGE_ROUTES } from '@/constants/routes';
 // Please edit this to allow other routes to be public as needed.
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
 export default authMiddleware({
-    publicRoutes: [PAGE_ROUTES.SIGN_IN, PAGE_ROUTES.SIGN_UP, PAGE_ROUTES.HOME],
+    publicRoutes: [
+        PAGE_ROUTES.SIGN_IN,
+        PAGE_ROUTES.SIGN_UP,
+        PAGE_ROUTES.HOME,
+    ],
 });
 
 export const config = {

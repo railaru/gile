@@ -1,4 +1,5 @@
-import { mutation } from './_generated/server';
+import { mutation, query } from './_generated/server';
+import { v } from 'convex/values';
 
 /**
  * Insert or update the user in a Convex table then return the document's ID.
@@ -13,7 +14,6 @@ import { mutation } from './_generated/server';
  * by the JWT token's Claims config.
  */
 export const store = mutation({
-    args: {},
     handler: async (ctx) => {
         const identity = await ctx.auth.getUserIdentity();
 
@@ -28,6 +28,7 @@ export const store = mutation({
             q.eq('tokenIdentifier', identity.tokenIdentifier)
         )
         .unique();
+
         if (user !== null) {
             // If we've seen this identity before but the name has changed, patch the value.
             if (user.name !== identity.name) {
@@ -35,10 +36,71 @@ export const store = mutation({
             }
             return user._id;
         }
+
         // If it's a create identity, create a create `User`.
         return await ctx.db.insert('users', {
             name: identity.name!,
             tokenIdentifier: identity.tokenIdentifier,
+            description: '',
+            interests: [],
         });
+    },
+});
+
+export const update = mutation({
+    args: {
+        description: v.string(),
+        interests: v.array(v.string()),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if ( !identity) {
+            throw new Error('Called updateUser without authentication present');
+        }
+
+        const user = await ctx.db
+        .query('users')
+        .withIndex('by_token', (q) =>
+            q.eq('tokenIdentifier', identity.tokenIdentifier)
+        )
+        .first();
+
+        if (user === null) {
+            throw new Error('User not found');
+        }
+
+        console.log({ user });
+
+        await ctx.db.patch(user._id, {
+            description: args.description,
+            interests: args.interests,
+        });
+    },
+});
+
+
+export const get = query({
+    handler: async (ctx) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (identity === null) {
+            return null;
+        }
+
+        const users = await ctx.db.query('users').collect();
+
+        const user = await ctx.db
+        .query('users')
+        .withIndex('by_token', (q) =>
+            q.eq('tokenIdentifier', identity.tokenIdentifier)
+        )
+        .first();
+
+        if (user === null) {
+            return null;
+        }
+
+        return user;
     },
 });
