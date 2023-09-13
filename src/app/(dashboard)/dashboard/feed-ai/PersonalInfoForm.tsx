@@ -12,8 +12,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/Toaster/useToast';
 import { useClickAway } from '@/hooks/client-actions/useClickAway';
+import { topicsListGroups } from '@/app/(dashboard)/dashboard/feed-ai/topicsListGroups';
 
-const maxCharacterCount = 70;
+const maxCharacterCount = 120;
 
 const schema = z.object({
     description: z
@@ -31,30 +32,7 @@ export default function PersonalInfoForm() {
 
     const [isAutoSuggestOpen, setIsAutoSuggestOpen] = useState(false);
     const [interests, setInterests] = useState(userData?.interests || []);
-
-    const suggestedTopics = [
-        'Agile',
-        'Team building',
-        'Business',
-    ];
-
-    const generalTopics = [
-        'Business',
-        'Career',
-        'Health',
-        'Business',
-        'Career',
-        'Health',
-        'Business',
-        'Career',
-        'Health',
-        'Business',
-        'Career',
-        'Health',
-        'Business',
-        'Career',
-        'Health',
-    ];
+    const [searchQuery, setSearchQuery] = useState('');
 
     const form = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -89,6 +67,10 @@ export default function PersonalInfoForm() {
         setInterests([...interests, interest]);
     };
 
+    const handleRemoveInterest = (interest: string) => {
+        setInterests(interests.filter((interestToCheck) => interestToCheck !== interest));
+    };
+
     useEffect(() => {
         form.setValue('description', userData?.description || '');
         setInterests(userData?.interests || []);
@@ -100,23 +82,16 @@ export default function PersonalInfoForm() {
         setIsAutoSuggestOpen(false);
     });
 
+    const filteredTopicListGroupItems = topicsListGroups.map((group) => ({
+        ...group,
+        items: group.items.filter((topic) => topic.toLowerCase().includes(searchQuery.toLowerCase())),
+    }));
+
     return (
         <form
             onSubmit={form.handleSubmit(handleSubmit)}
         >
-            <TextareaGroup
-                textAreaProps={{
-                    name: 'decision',
-                    placeholder:
-                        'I’m a project manager with 7 years of experience.',
-                    onChange: (e) => form.setValue('description', e.target.value),
-                    value: form.watch('description'),
-                }}
-                currentCharacterCount={20}
-                maxCharacterCount={120}
-            />
-
-            <div className="mt-8">
+            <div className="mb-8">
                 <label className="text-sm">
                     My interests
                 </label>
@@ -133,14 +108,13 @@ export default function PersonalInfoForm() {
                                 <button
                                     type="button"
                                     className="ml-0.5 rounded-full p-1 hover:bg-neutral-3/20 focus:bg-neutral-3/20"
-                                    onClick={() => setInterests(interests.filter((_, indexToCheck) => indexToCheck !== index))}
+                                    onClick={() => handleRemoveInterest(interest)}
                                 >
                                     <XIcon size={16}/>
                                 </button>
                             </div>
                         ))
                     }
-
                 </div>
 
                 <div
@@ -153,53 +127,74 @@ export default function PersonalInfoForm() {
                             placeholder: 'Start typing to search',
                             className: 'rounded-b-none focus:shadow-lg focus-visible:ring-0',
                             onClick: () => setIsAutoSuggestOpen(true),
+                            onChange: (e) => setSearchQuery(e.target.value),
+                            value: searchQuery,
                         }}
                         icon={<SearchIcon size={20} className="text-neutral-3"/>}
+
                     />
 
                     {
                         isAutoSuggestOpen && (
-                            <ul className="absolute mt-[-1px] bg-white w-full shadow-lg rounded-b-[4px] border-t-[1px] border-neutral-7 text-sm max-h-[200px] overflow-auto">
-                                <li className="p-1.5 px-3 m-1.5 font-medium">
-                                    Suggestions based on your profile:
-                                </li>
-
+                            <div
+                                className="absolute z-[2] mt-[-1px] bg-white w-full shadow-lg rounded-b-[4px] border-t-[1px] border-neutral-7 text-sm max-h-[300px] overflow-auto"
+                            >
                                 {
-                                    suggestedTopics.map((topic, index) => (
-                                        <li
-                                            key={index}
-                                            className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
-                                            role="button"
-                                            onClick={() => handleAddInterest(topic)}
-                                        >
-                                            {topic}
-                                        </li>
-                                    ))
+                                    filteredTopicListGroupItems.map((group, index) => {
+                                        const isLast = index === topicsListGroups.length - 1;
+
+                                        return (
+                                            <ul key={index}>
+                                                {
+                                                    !searchQuery && (
+                                                        <li className="p-1.5 px-3 m-1.5 font-medium">
+                                                            {group.title}
+                                                        </li>
+                                                    )
+                                                }
+
+                                                {
+                                                    group.items.map((topic, index) => {
+                                                        return (
+                                                            <li
+                                                                key={index}
+                                                                className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
+                                                                role="button"
+                                                                onClick={() => handleAddInterest(topic)}
+                                                            >
+                                                                {topic}
+                                                            </li>
+                                                        );
+                                                    })
+                                                }
+
+                                                {
+                                                    !isLast && !searchQuery && (
+                                                        <li className="h-[1px] border-t-neutral-7"/>
+                                                    )
+                                                }
+                                            </ul>
+                                        );
+                                    })
                                 }
-
-                                <li className="h-[1px] border-t-neutral-7"/>
-
-                                <li className="p-1.5 px-3 m-1.5 font-medium">
-                                    General topics:
-                                </li>
-
-                                {
-                                    generalTopics.map((topic, index) => (
-                                        <li
-                                            key={index}
-                                            className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
-                                            role="button"
-                                            onClick={() => handleAddInterest(topic)}
-                                        >
-                                            {topic}
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+                            </div>
                         )
                     }
                 </div>
             </div>
+
+            <TextareaGroup
+                textAreaProps={{
+                    name: 'decision',
+                    placeholder:
+                        'I’m a project manager with 7 years of experience.',
+                    onChange: (e) => form.setValue('description', e.target.value),
+                    value: form.watch('description'),
+                }}
+                currentCharacterCount={form.watch('description').length}
+                maxCharacterCount={maxCharacterCount}
+                error={form.formState.errors.description?.message}
+            />
 
             <Button type="submit" className="mt-4">
                 Save
