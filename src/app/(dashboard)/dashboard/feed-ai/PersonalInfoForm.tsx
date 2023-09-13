@@ -25,6 +25,14 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+function checkIfHasDifferentItems(array1: string[], array2: string[]) {
+    if (array1.length !== array2.length) {
+        return true;
+    }
+
+    return !array1.every(item => array2.includes(item));
+}
+
 export default function PersonalInfoForm() {
     const userData = useQuery(api.users.get);
     const updateUserData = useMutation(api.users.update);
@@ -86,6 +94,8 @@ export default function PersonalInfoForm() {
         ...group,
         items: group.items.filter((topic) => topic.toLowerCase().includes(searchQuery.toLowerCase())),
     }));
+
+    const hasUnsavedChanges = checkIfHasDifferentItems(interests, userData?.interests || []) || form.getValues().description !== userData?.description || '';
 
     return (
         <form
@@ -195,6 +205,14 @@ export default function PersonalInfoForm() {
                 maxCharacterCount={maxCharacterCount}
                 error={form.formState.errors.description?.message}
             />
+
+            {
+                hasUnsavedChanges && userData && (
+                    <p className="text-sm mt-3 text-neutral-2">
+                        You have unsaved changes.
+                    </p>
+                )
+            }
 
             <Button type="submit" className="mt-4">
                 Save
