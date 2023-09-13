@@ -70,7 +70,7 @@ export const update = mutation({
             throw new Error('User not found');
         }
 
-        console.log({ user });
+        console.log(args.interests);
 
         await ctx.db.patch(user._id, {
             description: args.description,

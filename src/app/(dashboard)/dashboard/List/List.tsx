@@ -8,15 +8,15 @@ import EmptyState from '@/app/(dashboard)/dashboard/EmptyState/EmptyState';
 import { cn } from '@/lib/utils';
 import { useDecisions } from '@/hooks/queries/useDecisions';
 import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
 } from '@/components/ui/DropdownMenu/DropdownMenu';
 import { CandlestickChart, FileEdit, List as ListIcon, MoreHorizontal, Scale, Trash } from 'lucide-react';
 import { PAGE_ROUTES } from '@/constants/routes';
-import useStoreUserEffect from '@/hooks/useStoreUserEffect';
+import useStoreUserEffect from '@/hooks/auth/useStoreUserEffect';
 
 export default function List() {
     const { data, isReady, isEmpty, isLoading } = useDecisions();

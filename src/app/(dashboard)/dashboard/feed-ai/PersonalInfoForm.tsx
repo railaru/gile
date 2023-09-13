@@ -1,7 +1,7 @@
 'use client';
 
 import TextareaGroup from '@/components/ui/Textarea/Textarea';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InputGroup } from '@/components/ui/Input/Input';
 import { SearchIcon, XIcon } from 'lucide-react';
 import { useMutation, useQuery } from 'convex/react';
@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/Toaster/useToast';
+import { useClickAway } from '@/hooks/client-actions/useClickAway';
 
 const maxCharacterCount = 70;
 
@@ -29,6 +30,7 @@ export default function PersonalInfoForm() {
     const { toast } = useToast();
 
     const [isAutoSuggestOpen, setIsAutoSuggestOpen] = useState(false);
+    const [interests, setInterests] = useState(userData?.interests || []);
 
     const suggestedTopics = [
         'Agile',
@@ -63,7 +65,7 @@ export default function PersonalInfoForm() {
     });
 
     const handleSubmit = (form: FormData) => {
-        updateUserData({ description: form.description, interests: [] }).catch(() => {
+        updateUserData({ description: form.description, interests }).catch(() => {
             toast({
                 title: 'Error',
                 description: 'Something went wrong updating user data',
@@ -77,9 +79,26 @@ export default function PersonalInfoForm() {
         });
     };
 
+    const handleAddInterest = (interest: string) => {
+        const checkIfInterestExists = interests.find((interestToCheck) => interestToCheck === interest);
+
+        if (checkIfInterestExists) {
+            return;
+        }
+
+        setInterests([...interests, interest]);
+    };
+
     useEffect(() => {
         form.setValue('description', userData?.description || '');
+        setInterests(userData?.interests || []);
     }, [userData?.description]);
+
+    const inputGroupRef = useRef(null);
+
+    useClickAway(inputGroupRef, () => {
+        setIsAutoSuggestOpen(false);
+    });
 
     return (
         <form
@@ -103,42 +122,56 @@ export default function PersonalInfoForm() {
                 </label>
 
                 <div className="flex flex-wrap mt-2">
-                    <div
-                        className="mb-2 mr-2 rounded-full bg-primary text-white px-2 py-1 flex items-center"
-                    >
-                        <p className="ml-1.5 text-sm">SaaS</p>
+                    {
+                        interests.map((interest, index) => (
+                            <div
+                                key={index}
+                                className="mb-2 mr-2 rounded-full bg-primary text-white px-2 py-1 flex items-center"
+                            >
+                                <p className="ml-1.5 text-sm">{interest}</p>
 
-                        <button
-                            type="button"
-                            className="ml-0.5 rounded-full p-1 hover:bg-neutral-3/20 focus:bg-neutral-3/20"
-                        >
-                            <XIcon size={16}/>
-                        </button>
-                    </div>
+                                <button
+                                    type="button"
+                                    className="ml-0.5 rounded-full p-1 hover:bg-neutral-3/20 focus:bg-neutral-3/20"
+                                    onClick={() => setInterests(interests.filter((_, indexToCheck) => indexToCheck !== index))}
+                                >
+                                    <XIcon size={16}/>
+                                </button>
+                            </div>
+                        ))
+                    }
+
                 </div>
 
-                <div className="relative">
+                <div
+                    ref={inputGroupRef}
+                    className="relative"
+                >
                     <InputGroup
                         className="mt-1"
                         inputProps={{
                             placeholder: 'Start typing to search',
                             className: 'rounded-b-none focus:shadow-lg focus-visible:ring-0',
-                            onFocus: () => setIsAutoSuggestOpen(true),
-                            onBlur: () => setIsAutoSuggestOpen(false),
+                            onClick: () => setIsAutoSuggestOpen(true),
                         }}
                         icon={<SearchIcon size={20} className="text-neutral-3"/>}
                     />
 
                     {
                         isAutoSuggestOpen && (
-                            <ul className="absolute mt-[-1px] bg-white w-full shadow-lg rounded-b-[4px] border-t-[1px] border-neutral-7 text-sm max-h-[300px] overflow-auto">
+                            <ul className="absolute mt-[-1px] bg-white w-full shadow-lg rounded-b-[4px] border-t-[1px] border-neutral-7 text-sm max-h-[200px] overflow-auto">
                                 <li className="p-1.5 px-3 m-1.5 font-medium">
                                     Suggestions based on your profile:
                                 </li>
 
                                 {
                                     suggestedTopics.map((topic, index) => (
-                                        <li key={index} className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7">
+                                        <li
+                                            key={index}
+                                            className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
+                                            role="button"
+                                            onClick={() => handleAddInterest(topic)}
+                                        >
                                             {topic}
                                         </li>
                                     ))
@@ -152,7 +185,12 @@ export default function PersonalInfoForm() {
 
                                 {
                                     generalTopics.map((topic, index) => (
-                                        <li key={index} className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7">
+                                        <li
+                                            key={index}
+                                            className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
+                                            role="button"
+                                            onClick={() => handleAddInterest(topic)}
+                                        >
                                             {topic}
                                         </li>
                                     ))
