@@ -14,7 +14,7 @@ export default function Page() {
                         <h1 className="text-2xl font-[300]">Evaluate options</h1>
 
                         {/* todo: add evaluation examples */}
-                        {/*<Examples/> */}
+                        {/*<AiSuggestions/> */}
                     </div>
 
                     <h2 className="lg:text-xl font-[300] text-neutral-2 max-w-[360px]">
