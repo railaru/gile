@@ -9,6 +9,7 @@ import { api } from '../../../../../../../convex/_generated/api';
 import { API_ROUTES } from '@/constants/routes';
 import Button from '@/components/ui/Button/Button';
 import { useToast } from '@/components/ui/Toaster/useToast';
+import { useOptions } from '@/hooks/queries/useOptions';
 
 type Params = {
     decision?: string;
@@ -50,16 +51,20 @@ function useData({ decision, userInterests, userDescription }: Params) {
 
 export default function Content() {
     const params = useParams();
+    const { toast } = useToast();
+
     const decisionId = params?.decisionId as Id<'decisions'>;
     const storedDecisionRecord = useQuery(api.decisions.getById, { _id: decisionId });
     const userData = useQuery(api.users.get);
+    const { data: options } = useOptions();
     const addOption = useMutation(api.options.add);
-    const { toast } = useToast();
-
     const { formattedData, isLoading } = useData({
         decision: storedDecisionRecord?.decision,
         userInterests: userData?.interests,
         userDescription: userData?.description,
+    });
+    const notYetAddedOptions = formattedData?.filter(item => {
+        return !options?.some(option => option.title === item);
     });
 
     const handleAdd = (title: string) => {
@@ -103,9 +108,9 @@ export default function Content() {
                     <p>Loading...</p>
                 )}
 
-                { !isLoading && formattedData && formattedData.length > 0 && (
+                { !isLoading && notYetAddedOptions && notYetAddedOptions.length > 0 && (
                     <ul className="flex flex-col gap-4">
-                        {formattedData.map((item, index) => (
+                        {notYetAddedOptions.map((item, index) => (
                             <li
                                 key={index}
                                 className="bg-neutral-7/50 rounded-[4px] px-4 py-[21.5px] flex justify-between items-center gap-4"
