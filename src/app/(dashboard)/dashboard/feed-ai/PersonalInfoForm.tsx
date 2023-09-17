@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/Toaster/useToast';
 import { useClickAway } from '@/hooks/client-actions/useClickAway';
 import { topicsListGroups } from '@/app/(dashboard)/dashboard/feed-ai/topicsListGroups';
+import { cn } from '@/lib/utils';
 
 const maxCharacterCount = 120;
 
@@ -137,7 +138,9 @@ export default function PersonalInfoForm() {
                         <InputGroup
                             inputProps={{
                                 placeholder: 'Start typing to search',
-                                className: 'rounded-b-none focus-visible:ring-0',
+                                className: cn('rounded-b-none focus-visible:ring-0', {
+                                    'rounded-r-none': hasEmptyItems
+                                }),
                                 onClick: () => setIsAutoSuggestOpen(true),
                                 onChange: (e) => setSearchQuery(e.target.value),
                                 value: searchQuery,
