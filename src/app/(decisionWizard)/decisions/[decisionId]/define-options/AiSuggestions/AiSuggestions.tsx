@@ -13,7 +13,7 @@ export default function AiSuggestions() {
         <>
             <Button
                 variant="ghost"
-                className="text-primary font-[300]"
+                className="text-primary font-[300] mt-2 lg:mt-0"
                 type="button"
                 onClick={() => setIsOpened(true)}
             >

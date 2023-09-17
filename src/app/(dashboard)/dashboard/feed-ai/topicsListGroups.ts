@@ -7,6 +7,9 @@ export const topicsListGroups = [
             'Health',
             'Travel',
             'Lifestyle',
+            'Fashion',
+            'Wellness',
+            'Fitness',
         ],
     },
     {
@@ -17,6 +20,10 @@ export const topicsListGroups = [
             'Tennis',
             'Baseball',
             'Golf',
+            'Soccer',
+            'Swimming',
+            'Fitness',
+            'Running',
         ],
     },
     {
@@ -29,6 +36,8 @@ export const topicsListGroups = [
             'Artificial intelligence',
             'Architecture',
             'Data Science',
+            'Machine Learning',
+            'Blockchain',
         ],
     },
     {
@@ -38,6 +47,8 @@ export const topicsListGroups = [
             'Sales',
             'Finance',
             'Entrepreneurship',
+            'Management',
+            'Startups',
         ],
     },
     {
@@ -48,6 +59,9 @@ export const topicsListGroups = [
             'Biology',
             'Astronomy',
             'Environmental Science',
+            'Geology',
+            'Meteorology',
+            'Psychology',
         ],
     },
     {
@@ -58,6 +72,9 @@ export const topicsListGroups = [
             'Gaming',
             'Books',
             'TV Shows',
+            'Comics',
+            'Theater',
+            'Art',
         ],
     },
     {
@@ -67,6 +84,9 @@ export const topicsListGroups = [
             'Nutrition',
             'Restaurant Reviews',
             'Baking',
+            'Food Photography',
+            'Vegan Recipes',
+            'Vegetarian Recipes',
         ],
     },
     {
@@ -76,6 +96,9 @@ export const topicsListGroups = [
             'Gardening',
             'DIY Projects',
             'Painting',
+            'Sculpture',
+            'Collecting',
+            'Knitting',
         ],
     },
     {
@@ -85,6 +108,9 @@ export const topicsListGroups = [
             'Budget Travel',
             'Cultural Experiences',
             'Travel Tips',
+            'Solo Travel',
+            'Family Travel',
+            'Travel Photography',
         ],
     },
 ];

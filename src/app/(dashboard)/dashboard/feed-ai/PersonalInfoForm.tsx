@@ -83,7 +83,7 @@ export default function PersonalInfoForm() {
     useEffect(() => {
         form.setValue('description', userData?.description || '');
         setInterests(userData?.interests || []);
-    }, [userData?.description]);
+    }, [userData?.description, form, userData?.interests]);
 
     const inputGroupRef = useRef(null);
 
@@ -179,7 +179,6 @@ export default function PersonalInfoForm() {
 
                                                 {
                                                     group.items.map((topic, index) => {
-
                                                         const itemIsAlreadyAdded = Boolean(interests.find((interest) => interest === topic));
 
                                                         if (itemIsAlreadyAdded) {
@@ -189,7 +188,7 @@ export default function PersonalInfoForm() {
                                                         return (
                                                             <li
                                                                 key={index}
-                                                                className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7"
+                                                                className="p-1.5 px-3 m-1.5 rounded-[4px] hover:bg-neutral-7 focus:bg-neutral-7"
                                                                 role="button"
                                                                 onClick={() => handleAddInterest(topic)}
                                                             >
