@@ -1,9 +1,43 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped
 with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## About
+
+This is the source code for [gile.to](https://gile.to) project.
+
 ## Getting Started
 
-First, run the development server:
+This app uses the following third party services:
+
+1. Clerk for authentication and user management.
+2. Convex managed backend for data storage and cloud functions.
+3. Vercel for hosting and deployment.
+4. OpenAI for GPT API.
+
+If you want to self host this app, you will need to create accounts with the above services and configure the app to use
+your own credentials.
+
+#### Once you have created accounts with the above services:
+
+Add your .env secrets to `.env.local` file:
+
+Copy `.env.template` to `.env.local` and fill in the values.
+
+```bash
+cp .env.template .env.local
+```
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -30,13 +64,6 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions
 are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use
-the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
 
