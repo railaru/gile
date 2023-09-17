@@ -10,6 +10,8 @@ import { API_ROUTES } from '@/constants/routes';
 import Button from '@/components/ui/Button/Button';
 import { useToast } from '@/components/ui/Toaster/useToast';
 import { useOptions } from '@/hooks/queries/useOptions';
+import AiOptionSkeletons
+    from '@/app/(decisionWizard)/decisions/[decisionId]/define-options/AiSuggestions/AiOptionSkeletons';
 
 type Params = {
     decision?: string;
@@ -105,7 +107,7 @@ export default function Content() {
 
             <div className="mt-10">
                 {isLoading && (
-                    <p>Loading...</p>
+                    <AiOptionSkeletons/>
                 )}
 
                 { !isLoading && notYetAddedOptions && notYetAddedOptions.length > 0 && (
