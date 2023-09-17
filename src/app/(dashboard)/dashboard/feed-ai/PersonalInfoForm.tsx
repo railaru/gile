@@ -72,6 +72,7 @@ export default function PersonalInfoForm() {
             return;
         }
 
+        setSearchQuery('');
         setInterests([...interests, interest]);
     };
 
@@ -96,6 +97,7 @@ export default function PersonalInfoForm() {
     }));
 
     const hasUnsavedChanges = checkIfHasDifferentItems(interests, userData?.interests || []) || form.getValues().description !== userData?.description || '';
+    const hasEmptyItems = filteredTopicListGroupItems.every((group) => group.items.length === 0);
 
     return (
         <form
@@ -131,18 +133,28 @@ export default function PersonalInfoForm() {
                     ref={inputGroupRef}
                     className="relative"
                 >
-                    <InputGroup
-                        className="mt-1"
-                        inputProps={{
-                            placeholder: 'Start typing to search',
-                            className: 'rounded-b-none focus:shadow-lg focus-visible:ring-0',
-                            onClick: () => setIsAutoSuggestOpen(true),
-                            onChange: (e) => setSearchQuery(e.target.value),
-                            value: searchQuery,
-                        }}
-                        icon={<SearchIcon size={20} className="text-neutral-3"/>}
+                    <div className="flex items-center mt-1">
+                        <InputGroup
+                            inputProps={{
+                                placeholder: 'Start typing to search',
+                                className: 'rounded-b-none focus-visible:ring-0',
+                                onClick: () => setIsAutoSuggestOpen(true),
+                                onChange: (e) => setSearchQuery(e.target.value),
+                                value: searchQuery,
+                            }}
+                            icon={<SearchIcon size={20} className="text-neutral-3"/>}
+                        />
 
-                    />
+                        {hasEmptyItems && (
+                            <Button
+                                type="button"
+                                className="rounded-r-[4px] rounded-l-none h-[40px]"
+                                onClick={() => handleAddInterest(searchQuery)}
+                            >
+                                Add
+                            </Button>
+                        )}
+                    </div>
 
                     {
                         isAutoSuggestOpen && (
@@ -152,8 +164,8 @@ export default function PersonalInfoForm() {
                                 {
                                     filteredTopicListGroupItems.map((group, index) => {
                                         const isLast = index === topicsListGroups.length - 1;
-                                        const groupHasUnadedItems = group.items.some((topic) => !interests.find((interest) => interest === topic));
-                                        const showTitle = !searchQuery && groupHasUnadedItems;
+                                        const groupHasNotAddedItems = group.items.some((topic) => !interests.find((interest) => interest === topic));
+                                        const showTitle = !searchQuery && groupHasNotAddedItems;
 
                                         return (
                                             <ul key={index}>
