@@ -8,8 +8,7 @@ export default authMiddleware({
     publicRoutes: [
         PAGE_ROUTES.SIGN_IN,
         PAGE_ROUTES.SIGN_UP,
-        PAGE_ROUTES.HOME,
-        '/api/ai-option-suggest', // todo: remove this
+        PAGE_ROUTES.HOME,        
     ],
 });
 
