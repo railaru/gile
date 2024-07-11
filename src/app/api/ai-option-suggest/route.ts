@@ -9,7 +9,7 @@ const schema = {
   properties: {
     decision_options: {
       type: "array",
-      description: "Get a liist of decision options to choose from.",
+      description: "Get a list of decision options to choose from.",
       items: {
         type: "object",
         properties: {
@@ -56,6 +56,6 @@ export async function GET(request: Request) {
     JSON.stringify(response.choices[0].message.function_call?.arguments),
     {
       status: 200,
-    }
+    },
   );
 }
